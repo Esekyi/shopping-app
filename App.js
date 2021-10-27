@@ -6,6 +6,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style = {{fontWeight: "900"}}>Hello World!!</Text>
+      <Text style = {{fontWeight: "900"}}>Skerbel Apparels</Text>
       <StatusBar style="auto" />
     </View>
   );
