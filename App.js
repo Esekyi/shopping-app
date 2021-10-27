@@ -1,22 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar, View } from 'react-native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import HomePage from './Screens/HomPage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  useFonts,
+  NotoSerif_400Regular,
+  NotoSerif_700Bold,
+} from '@expo-google-fonts/noto-serif';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style = {{fontWeight: "900"}}>Hello World!!</Text>
-      <Text style = {{fontWeight: "900"}}>Skerbel Apparels</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  let [fontsLoaded] = useFonts({
+    NotoSerif_400Regular,
+    NotoSerif_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <View />;
+  } else {
+    return (
+    <NavigationContainer>
+      <StatusBar barStyle = 'dark-content'/>
+      <Stack.Navigator screenOptions = {{header: () => null}}>
+        <Stack.Screen name="HomePage" component={HomePage} />
+        {/* <Stack.Screen name="HomePage" component={HomePage} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );}
+};
+
+export default App;
