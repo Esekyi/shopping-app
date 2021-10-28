@@ -1,16 +1,33 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, Dimensions, Image } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import cardItemList  from '../Consts/cardItemList'
-const width = Dimensions.get("screen.").width/2-15
+import cardItemList  from '../Consts/cardItemList';
+
+
+const width = (Dimensions.get("screen").width/2) - 15
 
 const HomePage = () => {
-  const CardItem =() =>{
-   return(<View style={styles.cardDesign}>
-     
+  const CardItem =({cardItemList}) =>{
+   return( <View style={styles.cardDesign}>
+      <View style={{alignItems:'flex-end'}}>
+        <View 
+          style={{
+            height: 30,
+            width: 30,
+            borderRadius: 15,
+            alignItems: 'center',
+            justifyContent: 'center',          
+            backgroundColor: cardItemList.like ? 'rgba(245, 25, 42, 0.2)' : 'rgba(0,0,0,0.2) ',
+          }}>
+          <FontAwesome name="heart" size={20} color={cardItemList.like ? 'rgb(46,18,210)' : '#000'} />
+        </View>
+      </View>
+      <View style={{height: 100, alignContent: 'center'}}>
+        <Image style={{flex: 1, resizeMode: 'contain'}} source={cardItemList.images} />
+      </View>
     </View>
-   )
-  }
+   );
+  };
   return (
         <SafeAreaView style={{backgroundColor: "#fff"}}>
 
@@ -31,19 +48,28 @@ const HomePage = () => {
             </View>            
           </View>
 
-          <View style={{margin: 10, flexDirection: 'row'}}>
-            <View style={styles.rectangleView}>
-              <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center', margin: 13}}>
+          <View style={{paddingHorizontal: 10, paddingVertical: 10, flexDirection: 'row', justifyContent: "space-between"}}>
+            <View style={{...styles.rectangleView, marginRight: 10}}>
+              <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center'}}>
                 Filter (0)
               </Text>
             </View>
             <View style={styles.rectangleView}>
-              <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center', margin: 13}}>
+              <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center'}}>
                 Featured
               </Text>
             </View>
           </View>
-          <FlatList numColumns={2} data={cardItemList} renderItem={({item}) => <Card cardItemList={item}/>} />
+          <FlatList 
+          style={{paddingHorizontal: 5}} 
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            marginTop: 10,
+            paddingBottom: 50,
+          }}
+          numColumns={2} 
+          data={cardItemList} 
+          renderItem={({item}) => <CardItem cardItemList={item}/>} />
         </SafeAreaView>
 
   )
@@ -54,24 +80,26 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingBottom: 20
   },
   rectangleView: {
-    width: 200,
+    flex: 1,
     height: 50,
     borderWidth: 1,
     borderColor: '#A9A9A9',
-    marginRight: 10,
     alignContent: 'center',
     justifyContent: 'center',
   },
   cardDesign: {
     height: 250,
-    backgroundColor: '#A9A9A9',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#A9A9A9',
     width,
-    marginHorizontal: 2,
     marginBottom: 20,
+    marginHorizontal: 5,
+    padding: 15,
   }
 });
 
