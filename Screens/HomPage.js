@@ -8,29 +8,33 @@ const width = (Dimensions.get("screen").width/2) - 15
 
 const HomePage = () => {
   const CardItem =({cardItemList}) =>{
-   return( <View style={styles.cardDesign}>
-      <View style={{alignItems:'flex-end'}}>
-        <View 
-          style={{
-            height: 30,
-            width: 30,
-            borderRadius: 15,
-            alignItems: 'center',
-            justifyContent: 'center',          
-            backgroundColor: cardItemList.like ? 'rgba(245, 25, 42, 0.2)' : 'rgba(0,0,0,0.2) ',
-          }}>
-          <FontAwesome name="heart" size={20} color={cardItemList.like ? 'rgb(46,18,210)' : '#000'} />
+   return( 
+   <View style={styles.cardDesign}>
+      <View style={{height: 250, alignContent: 'center'}}>
+        <Image style={{resizeMode: 'contain'}} style={{width: "100%", maxHeight: "100%"}} source={cardItemList.images} />
+      </View>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}> 
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 5}}>
+          <Text style={{fontWeight: 'bold'}}>
+            ${cardItemList.price}
+          </Text>
         </View>
+        <View >   
+          <FontAwesome name={cardItemList.favorite ? "heart" : "heart-o"} size={20} color={cardItemList.favorite ? 'rgb(426,42,68)' : '#000'} />
+        </View>
+       
       </View>
-      <View style={{height: 100, alignContent: 'center'}}>
-        <Image style={{flex: 1, resizeMode: 'contain'}} source={cardItemList.images} />
-      </View>
+      <Text style={{fontSize: 13.5, fontFamily: 'Montserrat_400Regular', marginTop: 25, marginBottom: 10}}>
+        {cardItemList.name}
+      </Text>
+    
     </View>
    );
   };
   return (
-        <SafeAreaView style={{backgroundColor: "#fff"}}>
-
+    <View style={{flex: 1}}>
+      <SafeAreaView style={{backgroundColor: "#fff"}}>
           <View style={{backgroundColor: "#fff", flexDirection: 'row', marginTop: 10}}>
               <Text style={{fontWeight: "bold", fontSize: 24, color: "#fff", marginRight: 10, marginLeft: 8, fontFamily: 'NotoSerif_400Regular', backgroundColor: '#000'}}> WOMEN </Text>
               <Text style={{fontWeight: "bold", fontSize: 24, color: "#000", fontFamily: 'NotoSerif_400Regular', backgroundColor: '#fff', marginRight: 10}}>MEN</Text>
@@ -40,7 +44,7 @@ const HomePage = () => {
           <View style={{backgroundColor: "#000"}}>
             <View style={styles.header}>
               <FontAwesome name="navicon" size={24} color="white" />
-              <Text style = {{fontWeight: "bold", fontSize: 24, color: "#fff", fontFamily: 'NotoSerif_400Regular'}}>SKERT APPARELS</Text>
+              <Text style = {{fontWeight: "bold", fontSize: 24, color: "#fff", fontFamily: 'NotoSerif_400Regular'}}>SKERBEL's APPARELS</Text>
               <View style={{flexDirection: 'row'}}>
                 <AntDesign name="user" size={24} color="white" style={{marginRight: 10}} />
                 <FontAwesome name="shopping-bag" size={24} color="white" />
@@ -60,8 +64,9 @@ const HomePage = () => {
               </Text>
             </View>
           </View>
-          <FlatList 
-          style={{paddingHorizontal: 5}} 
+        </SafeAreaView>
+      <FlatList 
+          style={{paddingHorizontal: 5, paddingBottom: 100, flex: 1}} 
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             marginTop: 10,
@@ -70,7 +75,8 @@ const HomePage = () => {
           numColumns={2} 
           data={cardItemList} 
           renderItem={({item}) => <CardItem cardItemList={item}/>} />
-        </SafeAreaView>
+    </View>
+        
 
   )
 }
@@ -92,9 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardDesign: {
-    height: 250,
+    // height: 350,
     backgroundColor: '#fff',
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderColor: '#A9A9A9',
     width,
     marginBottom: 20,
