@@ -1,13 +1,12 @@
 import React from 'react';
 import {TouchableOpacity, View, Text, ScrollView} from 'react-native';
-import AppHeader from '../components/AppHeader';
+import Appheader from '../components/Appheader';
 import { FontAwesome } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
 
 const SingleProductPage = ({navigation}) => {
     return (
         <ScrollView style={{flex: 1, backgroundColor: "#fff"}}>
-            <AppHeader />
+            <Appheader />
             <TouchableOpacity onPress={navigation.goBack}>
                 <View style={{padding: 10, flexDirection: 'row', alignItems: 'center'}}>
                     <FontAwesome name="chevron-left" size={15} color="black" />

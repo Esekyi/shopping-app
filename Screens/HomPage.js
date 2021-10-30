@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Dimensions, Image, TouchableWithoutFeedback, TouchableOpacity, ScrollView } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import cardItemList  from '../Consts/cardItemList';
-import AppHeader from '../components/AppHeader';
+import Appheader from '../components/Appheader';
 
 
 const width = (Dimensions.get("screen").width/2) - 15
@@ -45,7 +45,7 @@ const HomePage = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <SafeAreaView style={{backgroundColor: "#fff"}}>
-          <AppHeader />
+          <Appheader />
           {/* <View style={{paddingHorizontal: 10, paddingVertical: 10, flexDirection: 'row', justifyContent: "space-between"}}>
             <View style={{...styles.rectangleView, marginRight: 10}}>
               <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center'}}>
