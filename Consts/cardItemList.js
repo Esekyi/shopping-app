@@ -66,7 +66,7 @@ const storeItems = [
     },
     {
       id: 8,
-      name: 'Silky Straight Human Hair Full Lace Wig With Baby Hair - Red',
+      name: 'Silky Straight Human Hair Full Lace Wig',
       price: '290.99',
       favorite: false,
       images: require('../assets/8.jpg'),

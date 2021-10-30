@@ -29,6 +29,8 @@ import {
   Montserrat_900Black,
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat';
+import Singleproductpage from './Screens/singleProductPage';
+import SingleProductPage from './Screens/singleProductPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,7 +67,7 @@ const App = () => {
       <StatusBar barStyle = 'dark-content'/>
       <Stack.Navigator screenOptions = {{header: () => null}}>
         <Stack.Screen name="HomePage" component={HomePage} />
-        {/* <Stack.Screen name="HomePage" component={HomePage} /> */}
+        <Stack.Screen name="SinglePage" component={SingleProductPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );}
