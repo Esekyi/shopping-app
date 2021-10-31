@@ -68,7 +68,7 @@ const HomePage = ({navigation}) => {
           }}
           numColumns={2} 
           data={cardItemList} 
-          renderItem={({item}) => <CardItem cardItemList={item} onPressed={()=>navigation.navigate("SinglePage")} />} />
+          renderItem={({item}) => <CardItem cardItemList={item} onPressed={()=>navigation.navigate("SinglePage", item)} />} />
     </View>
 
   )
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   cardDesign: {
     // height: 350,
     backgroundColor: '#fff',
-    borderWidth: 0.3,
+    borderWidth: 0.2,
     borderColor: '#A9A9A9',
     width,
     marginBottom: 20,
