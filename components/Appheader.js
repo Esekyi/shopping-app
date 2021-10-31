@@ -15,7 +15,7 @@ const Appheader = () => {
               <View style={{backgroundColor: "#000"}}>
                 <View style={styles.header}>
                   <FontAwesome name="navicon" size={24} color="white" />
-                  <Text style = {{fontWeight: "bold", fontSize: 24, color: "#fff", fontFamily: 'NotoSerif_400Regular'}}>SKERBEL's APPARELS</Text>
+                  <Text style = {{fontWeight: "bold", fontSize: 24, color: "#fff", fontFamily: 'NotoSerif_400Regular'}}>SKERBEL's APPARELS 🤗</Text>
                   <View style={{flexDirection: 'row'}}>
                     <AntDesign name="user" size={24} color="white" style={{marginRight: 10}} />
                     <FontAwesome name="shopping-bag" size={24} color="white" />
@@ -39,5 +39,3 @@ const styles = StyleSheet.create({
 
 
 export default Appheader;
-
-

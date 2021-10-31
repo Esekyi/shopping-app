@@ -15,7 +15,7 @@ const storeItems = [
       price: '290.99',
       favorite: false,
       images: require('../assets/8.jpg'),
-      about:
+      description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
     {
