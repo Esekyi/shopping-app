@@ -18,7 +18,7 @@ const CardItem =({cardItemList, onPressed}) =>{
    <TouchableWithoutFeedback onPress={onPressed}>
      <View style={styles.cardDesign}>
          <View style={{height: 250, alignContent: 'center'}}>
-           <Image style={{resizeMode: 'contain'}} style={{width: "100%", maxHeight: "100%"}} source={cardItemList.images} />
+           <Image style={{resizeMode: 'contain'}} style={{width: "100%", maxHeight: "100%"}} source={cardItemList.images.imageMain} />
          </View>
          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}> 
 
