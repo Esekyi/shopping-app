@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import {TouchableOpacity, View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
 import Appheader from '../components/Appheader';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, FontAwesome5 } from '@expo/vector-icons';
 
-const width = (Dimensions.get("screen").width) - 15
+const width = (Dimensions.get("screen").width) - 300
+
 
 const SingleProductPage = ({navigation, route}) => {
     const cardItemList = route.params;
@@ -15,7 +16,7 @@ const [isFavorite, setIsFavorite] = useState(false);
   }, [cardItemList])
     
     return (
-        <View style={{ flex: 1, backgroundColor: "aliceblue" }}>
+        <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
             <ScrollView style={{flex: 1}}>
                 {/* <Appheader /> */}
                 <TouchableOpacity onPress={navigation.goBack}>
@@ -28,7 +29,7 @@ const [isFavorite, setIsFavorite] = useState(false);
                     <Image source={cardItemList.images.imageMain} style={{width: "100%", resizeMode: 'contain', height: 350}}/>
                 </View>
                 
-                <View style={{ ...styles.description, height: 350 }}>
+                <View style={{ ...styles.description }}>
                     <View style={{marginTop:10, flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
                         <Text style={{fontSize: 20,fontFamily: 'Montserrat_600SemiBold',flex: 0.8, marginLeft: 10}}>
                             {cardItemList.name} 
@@ -49,19 +50,109 @@ const [isFavorite, setIsFavorite] = useState(false);
                         </View>
                         <View style={{flexDirection:'row', marginTop: 20}}>
                             <Text>Lace Part Size/Inch</Text>
-                            <Text style={{ color: '#f00', marginRight: 150 }}> *</Text>
+                            <Text style={{ color: '#f00', marginRight: 130 }}> *</Text>
                             <Text>Density</Text>
                             <Text style={{ color: '#f00' }}> *</Text>
                         </View>
                         <View style={{flexDirection: 'row'}}>
-                            <View style={{ height: 45, width: 80, borderWidth: 1, borderRadius: 5, marginTop: 3, marginRight: 200, borderColor: '#777777', alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={styles.rectSizes}>
                                 <Text>13x4</Text>
                             </View>
-                            <View style={{ height: 45, width: 80, borderWidth: 1, borderRadius: 5, marginTop: 3, borderColor: '#777777', alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={styles.rectSizes }>
                                 <Text>150%</Text>
                             </View>
                         </View>
+                        <View>
+                            <View style={{flexDirection: 'row', marginTop:20 }}>
+                                <Text>Stretched Length/inch</Text>
+                                <Text style={{ color: '#f00' }}> *</Text>
+                            </View>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={styles.rectLength }>
+                                    <Text>14</Text>
+                                </View>
+                                <View style={styles.rectLength }>
+                                    <Text>16</Text>
+                                </View>
+                                <View style={styles.rectLength }>
+                                    <Text>18</Text>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', marginTop: 20}}>
+                                <View style={styles.rectLength }>
+                                    <Text>20</Text>
+                                </View>
+                                <View style={styles.rectLength }>
+                                    <Text>22</Text>
+                                </View>
+                                <View style={styles.rectLength }>
+                                    <Text>24</Text>
+                                </View>
+                            </View>
+                            <View style={{marginTop: 20}}>
+                                <Text>QTY</Text>
+                            </View>
+            
+                            {/* ++++++++++++++++++++++++==== */}
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={{...styles.rectSizes, marginRight: 10, flexDirection: 'row'}}>
+                                    <View >
+                                        <AntDesign name="minuscircleo" size={24} color="black" />
+                                    </View>
+                                    <View style={{padding: 5}}>
+                                        <Text style={{ fontFamily: 'NotoSerif_700Bold', fontSize: 19}}> 1 </Text>          
+                                    </View>
+                                    <View >
+                                        <AntDesign name="pluscircleo" size={24} color="black" />
+                                    </View>
+                                    
+                                </View>
+                                <View style={{marginTop: 30, flexDirection: 'row'}}>
+                                    <Text>( sold: </Text>
+                                    <Text style={{ color: 'rgba(125, 33, 33, 1)' }}>1709)</Text>
+                                    <View style={{ flexDirection: 'row', marginLeft: 30}}>
+                                        <FontAwesome5 name="shipping-fast" size={15} color="black" />
+                                        <Text> Free Delivery</Text>
+                                    </View>
+                                    
+                                </View>
+                            </View>
+
+                            <View style={styles.lineHR} />
+                            
+                            <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 25}}>
+                                <Text style={{ fontSize: 20.5,fontFamily: 'NotoSerif_700Bold', marginRight: 5}}>
+                                    Total:
+                                </Text>
+                                <Text style={{ fontSize: 20.5,fontFamily: 'NotoSerif_700Bold', color: 'rgba(125, 33, 33, 1)'}}>
+                                    USD ${cardItemList.price}
+                                </Text>
+                            </View>
+                        </View>
+                        <TouchableOpacity style={{ flex: 1, width: 250, alignContent: 'center', marginLeft: 70}}>
+                            <View style={{ ...styles.AddToBag, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flex:1, marginRight: 10 }} >
+                                <View style={{ marginRight: 5 }}>
+                                    <FontAwesome name="shopping-bag" size={18} color="white" />
+                                </View>
+                                <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>Add to Bag</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.lineHR} />
+
+                        <TouchableOpacity>
+                            <View style={{height: 250, alignContent: 'center'}}>
+                                <Image style={{ resizeMode: 'contain' }}
+                                    style={{
+                                        width: '100%',
+                                        maxHeight: "50%"
+                                    }}
+                                    source={require('../assets/card.png')} />
+                            </View>
+                    </TouchableOpacity>
+                        
                     </View>
+                    
+
                     <Text style={{fontSize: 14,textDecorationLine: 'underline',paddingLeft:10, fontWeight:'bold'}}>DESCRIPTION</Text>
                     <Text style={{ padding: 10 }}>
                         {cardItemList.description}
@@ -84,6 +175,10 @@ const [isFavorite, setIsFavorite] = useState(false);
                     </View>
                 </TouchableOpacity>
             </View>
+
+           
+
+            
         </View>
   
 
@@ -96,6 +191,38 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // backgroundColor: 'rgb(255,255,255)'
     },
+    rectSizes: {
+        height: 45,
+        // width: 80,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginTop: 3,
+        marginRight: 130,
+        borderColor: '#777777',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width,
+    },
+    rectLength: {
+        height: 45,
+        width: 80,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginTop: 3,
+        marginRight: 25,
+        borderColor: '#777777',
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+    },
+    lineHR: {
+        width: 389,
+        height: 2,
+        backgroundColor: 'rgba(0, 0, 0, 0.14)',
+        marginTop: 20,
+        marginBottom: 20,
+    },
+
     description:{
         flex: 1,
         backgroundColor: '#ffffff90',
@@ -103,8 +230,20 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 20,
         marginTop: 20,
-        paddingTop: 10,
-        width,
+        
+        
+        
+    },
+    qtyButton: {
+        height: 25,
+        width: 25,
+        borderRadius: 25 / 2,
+        borderWidth: 1,
+        // backgroundColor: '#000',
+        borderColor: '#000',
+        alignContent: 'center', justifyContent: 'center',
+        paddingLeft: 4,
+        paddingTop: 2
         
     },
     AddToBag: {
@@ -133,11 +272,10 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         borderRadius: 30 / 2,
-        borderWidth: 1,
-        
-        
+        borderWidth: 1,  
         
     },
+
 })
 
 
