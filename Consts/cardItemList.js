@@ -5,16 +5,17 @@ const storeItems = [
       price: '200.99',
       favorite: true,
       images: {imageMain: require('../assets/1.png'), imageBrown: require('../assets/1_Bown.png')},
+      productNumber:'78102927301',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-  
-    {
+  },
+   {
       id: 2,
-      name: '4 Bundles Hair Unprocessed Human Virgin Straight Hair',
-      price: '290.99',
+      name: 'T-Shirts for Men | Round Neck with graphic front',
+      price: '235.99',
       favorite: false,
-      images: {imageMain: require('../assets/11.png')},
+      images: { imageMain: require('../assets/11.png'), imageBrown: require('../assets/12_Brown.png') },
+      productNumber:'6727891800',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -24,6 +25,7 @@ const storeItems = [
       price: '235.99',
       favorite: false,
       images: { imageMain: require('../assets/12.png'), imageBrown: require('../assets/12_Brown.png') },
+      productNumber:'5536728920',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -34,6 +36,7 @@ const storeItems = [
       price: '125.99',
       favorite: true,
       images: { imageMain: require('../assets/4.png') },
+      productNumber:'2018727891',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -43,6 +46,7 @@ const storeItems = [
       price: '500.99',
       favorite: true,
       images: { imageMain: require('../assets/5.png') },
+      productNumber:'5201927993',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -52,6 +56,7 @@ const storeItems = [
       price: '150.99',
       favorite: false,
       images: { imageMain: require('../assets/7.png') },
+      productNumber:'2700917537',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -61,7 +66,8 @@ const storeItems = [
       price: '150.99',
       favorite: true,
     images:{ imageMain: require('../assets/6.png') },
-      description:
+    productNumber:'7092828883',
+    description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
     {
@@ -70,6 +76,7 @@ const storeItems = [
       price: '290.99',
       favorite: false,
       images: { imageMain: require('../assets/8.png'), imageBlack: require('../assets/8_Black.png'), imageBlonde:require('../assets/8_Blonde.png') },
+      productNumber:'1001990112',
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
