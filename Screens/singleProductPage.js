@@ -129,7 +129,7 @@ const [isFavorite, setIsFavorite] = useState(false);
                                 </Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={{ flex: 1, width: 250, alignContent: 'center', marginLeft: 70}}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Bag", cardItemList)} style={{ flex: 1, width: 250, alignContent: 'center', marginLeft: 70}}>
                             <View style={{ ...styles.AddToBag, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flex:1, marginRight: 10 }} >
                                 <View style={{ marginRight: 5 }}>
                                     <FontAwesome name="shopping-bag" size={18} color="white" />
@@ -138,21 +138,28 @@ const [isFavorite, setIsFavorite] = useState(false);
                             </View>
                         </TouchableOpacity>
                         <View style={styles.lineHR} />
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={{ fontFamily: 'NotoSerif_400Regular', fontSize: 16 }}> 30-day Returns</Text>
+                        </View>
+                        <View style={styles.lineHR} />
+                        
 
-                        <TouchableOpacity>
-                            <View style={{height: 250, alignContent: 'center'}}>
-                                <Image style={{ resizeMode: 'contain' }}
-                                    style={{
-                                        width: '100%',
-                                        maxHeight: "50%"
-                                    }}
-                                    source={require('../assets/card.png')} />
-                            </View>
-                    </TouchableOpacity>
+                       
                         
                     </View>
+                    <TouchableOpacity>
+                        <View style={{ alignContent: 'center', marginTop: 0}}>
+                            <Image
+                                style={{
+                                    width: '100%',
+                                    height: 125,
+                                    resizeMode: 'contain'
+                                    // maxHeight: 50,
+                                }}
+                                source={require('../assets/card.png')} />
+                        </View>
+                    </TouchableOpacity>
                     
-
                     <Text style={{fontSize: 14,textDecorationLine: 'underline',paddingLeft:10, fontWeight:'bold'}}>DESCRIPTION</Text>
                     <Text style={{ padding: 10 }}>
                         {cardItemList.description}
@@ -160,7 +167,7 @@ const [isFavorite, setIsFavorite] = useState(false);
                 </View>
             </ScrollView>
             <View style={{padding: 18, flexDirection:'row'}}>
-                <TouchableOpacity style={{flex: 1}}>
+                <TouchableOpacity onPress={() => navigation.navigate("Bag", cardItemList)} style={{flex: 1}}>
                         <View style={{ ...styles.AddToBag, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flex:1, marginRight: 10 }} >
                             <View style={{ marginRight: 5 }}>
                                 <FontAwesome name="shopping-bag" size={18} color="white" />
