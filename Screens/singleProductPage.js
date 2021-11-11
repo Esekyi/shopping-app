@@ -1,32 +1,63 @@
 import React,{useEffect,useState} from 'react';
-import {TouchableOpacity, View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
+import {TouchableOpacity, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Appheader from '../components/Appheader';
-import { FontAwesome, AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, FontAwesome5, Entypo } from '@expo/vector-icons';
 
-const width = (Dimensions.get("screen").width) - 300
+const width = (Dimensions.get("screen").width) - 300;
+
+const partSizes = ["13x4", "15x2", "13x1", "12x2"];
+const densities = [150, 90, 112, 300];
+const stretchedLengths = [14, 16, 18, 20, 22, 24];
 
 
 const SingleProductPage = ({navigation, route}) => {
     const cardItemList = route.params;
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [color, setColor] = useState("imageMain");
 
-const [isFavorite, setIsFavorite] = useState(false);
+    // partSize
+    const [partSize, setPartSize] = useState("13x4");
+    // density
+    const [density, setDensity] = useState(150);
+    // stretched length
+    const [stretchedLength, setStretchedLength] = useState(14);
+    // quantity
+    const [quantity, setQuantity] = useState(1);
 
-  useEffect(()=>{
-    setIsFavorite(cardItemList.favorite);
-  }, [cardItemList])
+    useEffect(()=>{
+        setIsFavorite(cardItemList.favorite);
+    }, [cardItemList])
+
+    const handleDecrease = () =>
+    {
+        if (quantity > 1)
+        {
+            setQuantity(old => old - 1);
+        }
+    }
+
+    const handleIncrease = () =>
+    {
+        if (quantity < cardItemList.stock)
+        {
+            setQuantity(old => old + 1);
+        }
+    }
     
     return (
         <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-            <ScrollView style={{flex: 1}}>
-                {/* <Appheader /> */}
+            <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity onPress={navigation.goBack}>
-                    <View style={{padding: 10, flexDirection: 'row', alignItems: 'center', marginTop: 50}}>
-                        <FontAwesome name="chevron-left" size={15} color="black" />
-                        <Text> Back</Text>
+                    <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center', marginTop: 50 }}>
+                            <Entypo name="chevron-thin-left" size={25} color="#777" />
+                            <Text style={{fontSize: 15}}> Back</Text>
                     </View>
                 </TouchableOpacity>
+            </View>
+            <ScrollView style={{flex: 1}}>
+                {/* <Appheader /> */}
                 <View style={styles.singleImage}>
-                    <Image source={cardItemList.images.imageMain} style={{width: "100%", resizeMode: 'contain', height: 350}}/>
+                    <Image source={cardItemList.images[color]} style={{width: "100%", resizeMode: 'contain', height: 350}}/>
                 </View>
                 
                 <View style={{ ...styles.description }}>
@@ -45,49 +76,63 @@ const [isFavorite, setIsFavorite] = useState(false);
                     <View style={{ padding: 10, marginTop: 10 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                             <Text style={{ marginRight: 10 }}>COLOUR:</Text>
-                            <View style={{ ...styles.imageColor, backgroundColor: '#f9f', marginRight:5 }} />
-                            <View style={{...styles.imageColor, backgroundColor: 'rgb(159,96,64)'}} />
+                            {Object.keys(cardItemList.images)
+                                .filter(color => color !== "imageMain")
+                                .map(color => <TouchableWithoutFeedback onPress={() => setColor(color)
+                            }>
+                                <View style={{ ...styles.imageColor, backgroundColor: color, marginRight:5 }} />
+                            </TouchableWithoutFeedback>)}
                         </View>
-                        <View style={{flexDirection:'row', marginTop: 20}}>
-                            <Text>Lace Part Size/Inch</Text>
-                            <Text style={{ color: '#f00', marginRight: 130 }}> *</Text>
-                            <Text>Density</Text>
-                            <Text style={{ color: '#f00' }}> *</Text>
-                        </View>
-                        <View style={{flexDirection: 'row'}}>
-                            <View style={styles.rectSizes}>
-                                <Text>13x4</Text>
+                        <View style={{ flexDirection: 'row', paddingTop: 20 }}>
+                            <View style={{flex: 1}}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text>Lace Part Size/Inch</Text>
+                                    <Text style={{ color: '#f00', marginRight: 130 }}> *</Text>  
+                                </View>
+                                <View style={{flexDirection: "row", flexWrap: "wrap"}}>
+                                    {partSizes.map(size => <TouchableWithoutFeedback onPress={()=> setPartSize(size)}>
+                                        <View style={{...styles.rectSizes, backgroundColor: partSize === size ? "black" : "white"}}>
+                                            <Text style={{
+                                                color: partSize === size ? "white" : "black",
+                                                fontWeight: partSize === size ? "800" : "400"
+                                            }}>{size}</Text>
+                                        </View>
+                                    </TouchableWithoutFeedback>)}
+                                </View>
                             </View>
-                            <View style={styles.rectSizes }>
-                                <Text>150%</Text>
+                            <View style={{flex: 1}}>
+                                <View style={{flexDirection: "row"}}>
+                                    <Text>Density</Text>
+                                    <Text style={{ color: '#f00' }}> *</Text>
+                                </View>
+                                <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                                    {densities.map(dens => <TouchableWithoutFeedback onPress={()=> setDensity(dens)}>
+                                        <View style={{...styles.rectSizes, backgroundColor: density === dens ? "black" : "white"} }>
+                                            <Text style={{
+                                                color: density === dens ? "white" : "black",
+                                                fontWeight: density === dens ? "800" : "400"
+                                            }}>{dens}%</Text>
+                                    </View>
+                                    </TouchableWithoutFeedback>)}
+                                </View>
                             </View>
                         </View>
                         <View>
-                            <View style={{flexDirection: 'row', marginTop:20 }}>
+                            <View style={{flexDirection: 'row', marginTop:50 }}>
                                 <Text>Stretched Length/inch</Text>
                                 <Text style={{ color: '#f00' }}> *</Text>
                             </View>
-                            <View style={{flexDirection: 'row'}}>
-                                <View style={styles.rectLength }>
-                                    <Text>14</Text>
-                                </View>
-                                <View style={styles.rectLength }>
-                                    <Text>16</Text>
-                                </View>
-                                <View style={styles.rectLength }>
-                                    <Text>18</Text>
-                                </View>
-                            </View>
-                            <View style={{flexDirection: 'row', marginTop: 20}}>
-                                <View style={styles.rectLength }>
-                                    <Text>20</Text>
-                                </View>
-                                <View style={styles.rectLength }>
-                                    <Text>22</Text>
-                                </View>
-                                <View style={styles.rectLength }>
-                                    <Text>24</Text>
-                                </View>
+                            <View style={{ flexDirection: 'row', flexWrap: "wrap" }}>
+                                {stretchedLengths.map(len => <TouchableWithoutFeedback onPress={()=> setStretchedLength(len)}>
+                                    <View style={{...styles.rectLength, backgroundColor: stretchedLength === len ? "black" : "transparent"} }>
+                                        <Text
+                                            style={{
+                                                color: stretchedLength === len ? "white" : "black",
+                                                fontWeight: stretchedLength === len ? "800" : "400"
+                                            }}>{len}</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                )}
                             </View>
                             <View style={{marginTop: 20}}>
                                 <Text>QTY</Text>
@@ -95,26 +140,31 @@ const [isFavorite, setIsFavorite] = useState(false);
             
                             {/* ++++++++++++++++++++++++==== */}
                             <View style={{flexDirection: 'row'}}>
-                                <View style={{...styles.rectSizes, marginRight: 10, flexDirection: 'row'}}>
-                                    <View >
-                                        <AntDesign name="minuscircleo" size={24} color="black" />
-                                    </View>
+                                <View style={{ ...styles.rectSizes, marginRight: 10, flexDirection: 'row' }}>
+                                    <TouchableWithoutFeedback onPress={handleDecrease}>
+                                        <View >
+                                            <AntDesign name="minuscircleo" size={24} color="black" />
+                                        </View>
+                                    </TouchableWithoutFeedback>
                                     <View style={{padding: 5}}>
-                                        <Text style={{ fontFamily: 'NotoSerif_700Bold', fontSize: 19}}> 1 </Text>          
+                                        <Text style={{ fontFamily: 'NotoSerif_700Bold', fontSize: 19}}> {quantity} </Text>          
                                     </View>
-                                    <View >
-                                        <AntDesign name="pluscircleo" size={24} color="black" />
-                                    </View>
+                                    <TouchableWithoutFeedback onPress={handleIncrease}>
+                                        <View >
+                                            <AntDesign name="pluscircleo" size={24} color="black" />
+                                        </View>
+                                    </TouchableWithoutFeedback>
                                     
                                 </View>
-                                <View style={{marginTop: 30, flexDirection: 'row'}}>
-                                    <Text>( sold: </Text>
-                                    <Text style={{ color: 'rgba(125, 33, 33, 1)' }}>1709)</Text>
-                                    <View style={{ flexDirection: 'row', marginLeft: 30}}>
+                                <View style={{ marginTop: 30, flex: 1, flexDirection: 'row', justifyContent: "space-around" }}>
+                                    <View style={{flexDirection: "row"}}>
+                                        <Text>( sold: </Text>
+                                        <Text style={{ color: 'rgba(125, 33, 33, 1)' }}>1709)</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row'}}>
                                         <FontAwesome5 name="shipping-fast" size={15} color="black" />
                                         <Text> Free Delivery</Text>
                                     </View>
-                                    
                                 </View>
                             </View>
 
@@ -160,7 +210,7 @@ const [isFavorite, setIsFavorite] = useState(false);
                         </View>
                     </TouchableOpacity>
                     
-                    <Text style={{fontSize: 14,textDecorationLine: 'underline',paddingLeft:10, fontWeight:'bold'}}>DESCRIPTION</Text>
+                    <Text style={{fontSize: 14,textDecorationLine: 'underline',paddingLeft:10, fontWeight:'bold', paddingTop: 20}}>DESCRIPTION</Text>
                     <Text style={{ padding: 10 }}>
                         {cardItemList.description}
                     </Text>
@@ -204,19 +254,23 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginTop: 3,
-        marginRight: 130,
         borderColor: '#777777',
         alignItems: 'center',
         justifyContent: 'center',
-        width,
+        paddingHorizontal: 20,
+        marginRight: 10,
+        marginBottom: 10
+        // width,
     },
     rectLength: {
         height: 45,
-        width: 80,
+        // width: 80,
+        paddingHorizontal: 35,
         borderWidth: 1,
         borderRadius: 5,
         marginTop: 3,
-        marginRight: 25,
+        marginBottom: 10,
+        marginRight: 10,
         borderColor: '#777777',
         alignItems: 'center',
         justifyContent: 'center',

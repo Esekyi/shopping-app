@@ -21,10 +21,12 @@ const Bag = ({ navigation, route }) =>
                     <View style={{padding: 10,  flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'space-between',borderBottomWidth: 0.5,borderBottomColor: '#eee'}}>
                         <Entypo name="chevron-thin-left" size={27} color="#777" />
                         <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={'#7770'} />
-                        <View style={{flexDirection:'row', alignItems:'flex-start'}}>
-                            <Text style={{fontSize: 22, fontFamily: 'Poppins_700Bold_Italic', letterSpacing:-1.8}}>SKERBEL APPARELS</Text>
-                            <Text style={{fontSize: 14}}>®️</Text>
-                        </View>
+                        <TouchableOpacity onPress={()=>navigation.navigate('HomePage', cardItemList)}>
+                            <View style={{flexDirection:'row', alignItems:'flex-start'}}>
+                                <Text style={{fontSize: 22, fontFamily: 'Poppins_700Bold_Italic', letterSpacing:-1.8}}>SKERBEL APPARELS</Text>
+                                <Text style={{fontSize: 14}}>®️</Text>
+                            </View>
+                        </TouchableOpacity>
                         <View style={{flexDirection: "row"}}>
                             <TouchableOpacity style={{marginRight: 15}} onPress={()=>setIsFavorite(!isFavorite)} >   
                                 <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={isFavorite ? 'rgb(426,42,68)' : '#777'} />
@@ -59,17 +61,21 @@ const Bag = ({ navigation, route }) =>
                             <View style={{marginTop: 3}}>
                                 <Text style={{color:'#777', fontSize:12}}>size: OS</Text>
                             </View>
-                            <TouchableOpacity>
-                                <View style={{ marginTop: 10, flexDirection: 'row' }}>
-                                    <View>
-                                        <Entypo name="resize-100-" size={14} color="#777" />
-                                    </View>
-                                    <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Edit size</Text>
-                                    <AntDesign name="close" size={16} color="#777" />
-                                    <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Remove</Text>
-                                    
+                            
+                            <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                                <View>
+                                    <Entypo name="resize-100-" size={14} color="#777" />
                                 </View>
-                            </TouchableOpacity>
+                                <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Edit size</Text>
+                                <AntDesign name="close" size={16} color="#777" />
+                                <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Remove</Text>
+                                <TouchableOpacity style={{marginRight: 15, flexDirection: 'row'}} onPress={()=>setIsFavorite(!isFavorite)} >   
+                                    <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={15} color={isFavorite ? 'rgb(426,42,68)' : '#777'} />
+                                    <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19, paddingTop: 1 }}>Move to Favorites</Text>
+                                </TouchableOpacity>
+                                
+                            </View>
+                           
                         </View>
                        
 
@@ -81,6 +87,9 @@ const Bag = ({ navigation, route }) =>
                     
                     
                     
+                </View>
+                <View>
+
                 </View>
                 
             </ScrollView>
