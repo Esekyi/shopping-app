@@ -54,6 +54,7 @@ import
 // import Singleproductpage from './Screens/singleProductPage';
 import SingleProductPage from './Screens/singleProductPage';
 import Bag from './Screens/Bag';
+import { BagProvider } from './providers/bagProvider';
 
 const Stack = createNativeStackNavigator();
 
@@ -104,14 +105,16 @@ const App = () => {
     return <View />;
   } else {
     return (
-    <NavigationContainer>
-      <StatusBar barStyle = 'dark-content'/>
-      <Stack.Navigator screenOptions = {{header: () => null}}>
-        <Stack.Screen name="HomePage" component={HomePage} />
-        <Stack.Screen name="SinglePage" component={SingleProductPage} />
-        <Stack.Screen name="Bag" component={Bag} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <BagProvider>
+        <NavigationContainer>
+          <StatusBar barStyle = 'dark-content'/>
+          <Stack.Navigator screenOptions = {{header: () => null}}>
+            <Stack.Screen name="HomePage" component={HomePage} />
+            <Stack.Screen name="SinglePage" component={SingleProductPage} />
+            <Stack.Screen name="Bag" component={Bag} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </BagProvider>
   );}
 };
 
