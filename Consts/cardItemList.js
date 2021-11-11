@@ -11,8 +11,11 @@ const storeItems = [
       sienna: require('../assets/1_Bown.png'),
       // violet: require('../assets/1_Bown.png'),
     },
-      productNumber:'78102927301',
+      productNumber:'CT78102927',
       stock: 10,
+      partSize: ['12x2','12x4','15x2'],
+      density: ['100','200','150'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
   },
@@ -26,8 +29,11 @@ const storeItems = [
        black: require('../assets/11.png'),
        darkslategray: require('../assets/straightBlack.jpg')
      },
-      productNumber:'6727891800',
+      productNumber:'DS2891800',
       stock: 10,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -41,8 +47,11 @@ const storeItems = [
         wheat: require('../assets/lightBrownShirt.webp'),
         lightsalmon: require('../assets/lightsalmon.webp'),
       },
-      productNumber:'5536728920',
+      productNumber:'GY728920',
       stock: 80,
+      partSize: ['M','L','XXL','XS'],
+      density: ['OS'],
+      stretchedLength: ['OS'],
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
@@ -58,6 +67,9 @@ const storeItems = [
       },
       productNumber:'6209827378',
       stock: 120,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
@@ -72,8 +84,11 @@ const storeItems = [
         black: require('../assets/4.png'),
         wheat:require('../assets/blonde.png'),
       },
-      productNumber:'2018727891',
+      productNumber:'XP8727891',
       stock: 40,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -88,8 +103,11 @@ const storeItems = [
         darkgreen: require('../assets/green.jpg')
         
       },
-      productNumber:'5201927993',
+      productNumber:'QP1927993',
       stock: 10,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -104,8 +122,11 @@ const storeItems = [
         pink: require('../assets/pinkShirt.webp'),
 
       },
-      productNumber:'2700917537',
+      productNumber:'WV7097537',
       stock: 20,
+      partSize: ['L','XL'],
+      density: ['150','90'],
+      stretchedLength: ['14','18','20'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -119,8 +140,11 @@ const storeItems = [
         black: require('../assets/6.png'),
         saddlebrown: require('../assets/fringebrown.png')
       },
-    productNumber:'7092828883',
+    productNumber:'AS2828883',
     stock: 19,
+    partSize: ['12x4','15x2'],
+    density: ['150','90','300'],
+    stretchedLength: ['14','16','18','20','22'],
     description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -134,8 +158,11 @@ const storeItems = [
         black: require('../assets/8_Black.png'),
         sienna: require('../assets/1_Bown.png')
       },
-      productNumber:'1001990112',
+      productNumber:'GS1990112',
       stock: 32,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
   },
@@ -149,11 +176,17 @@ const storeItems = [
         black: require('../assets/8_Black.png'),
         darkred: require('../assets/straight_wig_nadula.png')
       },
-      productNumber:'1001990112',
+      productNumber:'AC100199',
       stock: 50,
+      partSize: ['12x4','15x2'],
+      density: ['150','90','300'],
+      stretchedLength: ['14','16','18','20','22'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
-  ];
+];
+  
+export const bag = [];
+
   
   export default storeItems;

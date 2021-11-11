@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
+import cardItemList  from '../Consts/cardItemList';
 
-const Appheader = () => {
+
+const Appheader = ({ navigator }) =>
+{
+
     return (
         <View style={{backgroundColor: '#fff'}}>
           <SafeAreaView style={{backgroundColor: "#fff"}}>
@@ -13,27 +17,42 @@ const Appheader = () => {
               </View>
     
               <View style={{backgroundColor: "#000"}}>
-                <View style={styles.header}>
-                  <FontAwesome name="navicon" size={24} color="white" />
-                  <Text style = {{fontWeight: "bold", fontSize: 24, color: "#fff", fontFamily: 'NotoSerif_400Regular'}}>SKERBEL's APPARELS</Text>
-                  <View style={{flexDirection: 'row'}}>
-                    <AntDesign name="user" size={24} color="white" style={{marginRight: 10}} />
-                    <FontAwesome name="shopping-bag" size={24} color="white" />
-                  </View>              
-                </View>            
-              </View>
-            </SafeAreaView>
+                  <View style={styles.header}>
+                <FontAwesome name="navicon" size={24} color="white" />
+                <View style={{flexDirection:'row', alignItems:'flex-start'}}>
+                <Text style={{
+                  fontSize: 23,
+                  color: '#fff',
+                  fontFamily: 'Poppins_700Bold_Italic',
+                  letterSpacing: -1.8,
+                  paddingLeft: 15,
+                }}>
+                  SKERBEL APPARELS
+                </Text>
+                
+                <AntDesign name="trademark" size={10} color="rgb(235,235,235)" />
+                </View>
+                                  
+                    <View style={{ flexDirection: 'row' }}>
+                      <AntDesign name="user" size={24} color="white" style={{ marginRight: 10 }} />
+                      <TouchableOpacity onPress={()=>navigator('Bag')}>
+                        <FontAwesome name="shopping-bag" size={24} color="white" />
+                      </TouchableOpacity>
+                    </View>              
+                  </View>            
+                </View>
+              </SafeAreaView>
         </View>
                 
     );
 }
 const styles = StyleSheet.create({
     header: {
-        marginTop: 20,
+        marginTop: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        paddingBottom: 20
+        paddingBottom: 15
       },
 })
 
