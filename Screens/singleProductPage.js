@@ -2,25 +2,28 @@ import React,{useEffect,useState} from 'react';
 import {TouchableOpacity, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Appheader from '../components/Appheader';
 import { FontAwesome, AntDesign, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { useBag } from '../providers/bagProvider';
 
 const width = (Dimensions.get("screen").width) - 300;
 
-const partSizes = ["13x4", "15x2", "13x1", "12x2"];
-const densities = [150, 90, 112, 300];
-const stretchedLengths = [14, 16, 18, 20, 22, 24];
+// const partSizes = ["13x4", "15x2", "13x1", "12x2"];
+// const densities = [150, 90, 112, 300];
+// const stretchedLengths = [14, 16, 18, 20, 22, 24];
 
 
-const SingleProductPage = ({navigation, route}) => {
+const SingleProductPage = ({ navigation, route }) =>
+{
+    const { add: addToBag } = useBag();
     const cardItemList = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
     const [color, setColor] = useState("imageMain");
 
     // partSize
-    const [partSize, setPartSize] = useState("13x4");
+    const [partSize, setPartSize] = useState(cardItemList.partSize[0]);
     // density
-    const [density, setDensity] = useState(150);
+    const [density, setDensity] = useState(cardItemList.density[0]);
     // stretched length
-    const [stretchedLength, setStretchedLength] = useState(14);
+    const [stretchedLength, setStretchedLength] = useState(cardItemList.stretchedLength[0]);
     // quantity
     const [quantity, setQuantity] = useState(1);
 
@@ -42,6 +45,19 @@ const SingleProductPage = ({navigation, route}) => {
         {
             setQuantity(old => old + 1);
         }
+    }
+
+    const handleAddToBag = () =>
+    {
+        addToBag({
+            image: cardItemList.images[color],
+            name: cardItemList.name,
+            productNumber: cardItemList.productNumber,
+            size: partSize,
+            price: cardItemList.price * quantity,
+            quantity,
+        });
+        navigation.navigate("Bag");
     }
     
     return (
@@ -78,7 +94,7 @@ const SingleProductPage = ({navigation, route}) => {
                             <Text style={{ marginRight: 10 }}>COLOUR:</Text>
                             {Object.keys(cardItemList.images)
                                 .filter(color => color !== "imageMain")
-                                .map(color => <TouchableWithoutFeedback onPress={() => setColor(color)
+                                .map((color, id) => <TouchableWithoutFeedback key={id} onPress={() => setColor(color)
                             }>
                                 <View style={{ ...styles.imageColor, backgroundColor: color, marginRight:5 }} />
                             </TouchableWithoutFeedback>)}
@@ -90,7 +106,7 @@ const SingleProductPage = ({navigation, route}) => {
                                     <Text style={{ color: '#f00', marginRight: 130 }}> *</Text>  
                                 </View>
                                 <View style={{flexDirection: "row", flexWrap: "wrap"}}>
-                                    {partSizes.map(size => <TouchableWithoutFeedback onPress={()=> setPartSize(size)}>
+                                    {cardItemList.partSize.map((size, key) => <TouchableWithoutFeedback key={key} onPress={()=> setPartSize(size)}>
                                         <View style={{...styles.rectSizes, backgroundColor: partSize === size ? "black" : "white"}}>
                                             <Text style={{
                                                 color: partSize === size ? "white" : "black",
@@ -106,7 +122,7 @@ const SingleProductPage = ({navigation, route}) => {
                                     <Text style={{ color: '#f00' }}> *</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-                                    {densities.map(dens => <TouchableWithoutFeedback onPress={()=> setDensity(dens)}>
+                                    {cardItemList.density.map((dens, id) => <TouchableWithoutFeedback key={id} onPress={()=> setDensity(dens)}>
                                         <View style={{...styles.rectSizes, backgroundColor: density === dens ? "black" : "white"} }>
                                             <Text style={{
                                                 color: density === dens ? "white" : "black",
@@ -123,7 +139,7 @@ const SingleProductPage = ({navigation, route}) => {
                                 <Text style={{ color: '#f00' }}> *</Text>
                             </View>
                             <View style={{ flexDirection: 'row', flexWrap: "wrap" }}>
-                                {stretchedLengths.map(len => <TouchableWithoutFeedback onPress={()=> setStretchedLength(len)}>
+                                {cardItemList.stretchedLength.map((len, id) => <TouchableWithoutFeedback key={id} onPress={()=> setStretchedLength(len)}>
                                     <View style={{...styles.rectLength, backgroundColor: stretchedLength === len ? "black" : "transparent"} }>
                                         <Text
                                             style={{
@@ -175,11 +191,11 @@ const SingleProductPage = ({navigation, route}) => {
                                     Total:
                                 </Text>
                                 <Text style={{ fontSize: 20.5,fontFamily: 'NotoSerif_700Bold', color: 'rgba(125, 33, 33, 1)'}}>
-                                    USD ${cardItemList.price}
+                                    USD ${(cardItemList.price * quantity).toFixed(2)}
                                 </Text>
                             </View>
                         </View>
-                        <TouchableOpacity onPress={() => navigation.navigate("Bag", cardItemList)} style={{ flex: 1, width: 250, alignContent: 'center', marginLeft: 70}}>
+                        <TouchableOpacity onPress={handleAddToBag} style={{ flex: 1, width: 250, alignContent: 'center', marginLeft: 70}}>
                             <View style={{ ...styles.AddToBag, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flex:1, marginRight: 10 }} >
                                 <View style={{ marginRight: 5 }}>
                                     <FontAwesome name="shopping-bag" size={18} color="white" />
@@ -217,7 +233,7 @@ const SingleProductPage = ({navigation, route}) => {
                 </View>
             </ScrollView>
             <View style={{padding: 18, flexDirection:'row'}}>
-                <TouchableOpacity onPress={() => navigation.navigate("Bag", cardItemList)} style={{flex: 1}}>
+                <TouchableOpacity onPress={handleAddToBag} style={{flex: 1}}>
                         <View style={{ ...styles.AddToBag, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', flex:1, marginRight: 10 }} >
                             <View style={{ marginRight: 5 }}>
                                 <FontAwesome name="shopping-bag" size={18} color="white" />

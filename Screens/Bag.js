@@ -1,18 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,Image, TouchableWithoutFeedback } from 'react-native';
 import Appheader from '../components/Appheader';
-import { FontAwesome,Entypo, SimpleLineIcons, AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, Entypo, SimpleLineIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import storeItems, { bag } from '../Consts/cardItemList';
+import { useBag } from '../providers/bagProvider';
 
-
-    
-const Bag = ({ navigation, route }) =>
+const Bag = ({ navigation }) =>
 {
-    const cardItemList = route.params;
-    const [isFavorite, setIsFavorite] = useState(false);
+    const { bag, remove } = useBag();
+    const estShipping = 12.90;
 
-  useEffect(()=>{
-    setIsFavorite(cardItemList.favorite);
-  }, [cardItemList])
+    const subtotal = (() =>
+    {
+        var output = 0;
+        bag.forEach(item => output += parseFloat(item.price));
+        return output;
+    })();
+
+    const total = bag.length < 1 ? 0 : subtotal + estShipping;
+
+    const [isFavorite, setIsFavorite] = useState(false);
+    
     return (
         <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
             {/* <Appheader /> */}
@@ -20,17 +28,17 @@ const Bag = ({ navigation, route }) =>
                 <TouchableOpacity onPress={navigation.goBack}>
                     <View style={{padding: 10,  flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'space-between',borderBottomWidth: 0.5,borderBottomColor: '#eee'}}>
                         <Entypo name="chevron-thin-left" size={27} color="#777" />
-                        <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={'#7770'} />
-                        <TouchableOpacity onPress={()=>navigation.navigate('HomePage', cardItemList)}>
+                        {/* <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={'#7770'} /> */}
+                        <TouchableOpacity onPress={()=>navigation.navigate('HomePage', storeItems)}>
                             <View style={{flexDirection:'row', alignItems:'flex-start'}}>
                                 <Text style={{fontSize: 22, fontFamily: 'Poppins_700Bold_Italic', letterSpacing:-1.8}}>SKERBEL APPARELS</Text>
                                 <Text style={{fontSize: 14}}>®️</Text>
                             </View>
                         </TouchableOpacity>
                         <View style={{flexDirection: "row"}}>
-                            <TouchableOpacity style={{marginRight: 15}} onPress={()=>setIsFavorite(!isFavorite)} >   
-                                <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={isFavorite ? 'rgb(426,42,68)' : '#777'} />
-                            </TouchableOpacity>
+                            {/* <TouchableOpacity style={{marginRight: 15}} onPress={()=>setIsFavorite(!isFavorite)} >    */}
+                                {/* <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={27} color={isFavorite ? 'rgb(426,42,68)' : '#777'} />
+                            </TouchableOpacity> */}
                             <TouchableOpacity>
                                 <SimpleLineIcons name="handbag" size={29} color="#777" />
                             </TouchableOpacity>
@@ -41,11 +49,12 @@ const Bag = ({ navigation, route }) =>
             </View>
             <ScrollView style={{flex: 1}}>
                 <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize: 20, fontFamily: 'Poppins_600SemiBold',marginTop: 20, marginBottom: 20}}>Shopping Bag (2)</Text>
+                    <Text style={{fontSize: 20, fontFamily: 'Poppins_600SemiBold',marginTop: 20, marginBottom: 20}}>Shopping Bag ({bag.length})</Text>
                 </View>
-                <View style={{padding: 20}}>
-                    <View style={{ flexDirection:'row', flex:1}}>
-                        <Image source={cardItemList.images.imageMain}
+
+                {bag.map(item=> <View style={{ padding: 20 }}>
+                    <View key={item.id} style={{ flexDirection:'row', flex:1, paddingBottom: 20}}>
+                        <Image source={item.image}
                             style={{
                                 width: 70,
                                 resizeMode: 'contain',
@@ -54,12 +63,15 @@ const Bag = ({ navigation, route }) =>
                                 marginTop:15
                             }} />
                         <View style={{flex: 1, marginRight:50}}>
-                            <Text style={{ fontFamily: 'Poppins_400Regular', letterSpacing: -0.7, color: '#000' }}>{cardItemList.name}</Text>
+                            <Text style={{ fontFamily: 'Poppins_400Regular', letterSpacing: -0.7, color: '#000' }}>{item.name}</Text>
                              <View style={{marginTop: 8}}>
-                                <Text style={{color:'#777', fontSize: 13.5}}>{cardItemList.productNumber}</Text>
+                                <Text style={{color:'#777', fontSize: 13.5}}>{item.productNumber}</Text>
                             </View>
                             <View style={{marginTop: 3}}>
-                                <Text style={{color:'#777', fontSize:12}}>size: OS</Text>
+                                <Text style={{color:'#777', fontSize:12}}>size: {item.size}</Text>
+                            </View>
+                            <View style={{paddingTop: 4}}>
+                                <Text style={{color:'#777', fontSize:12}}>QTY: {item.quantity}</Text>
                             </View>
                             
                             <View style={{ marginTop: 10, flexDirection: 'row' }}>
@@ -68,7 +80,9 @@ const Bag = ({ navigation, route }) =>
                                 </View>
                                 <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Edit size</Text>
                                 <AntDesign name="close" size={16} color="#777" />
-                                <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Remove</Text>
+                                <TouchableWithoutFeedback onPress={()=> remove(item)}>
+                                    <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19 }}>Remove</Text>
+                                </TouchableWithoutFeedback>
                                 <TouchableOpacity style={{marginRight: 15, flexDirection: 'row'}} onPress={()=>setIsFavorite(!isFavorite)} >   
                                     <FontAwesome name={isFavorite ? "heart" : "heart-o"} size={15} color={isFavorite ? 'rgb(426,42,68)' : '#777'} />
                                     <Text style={{ marginLeft: 3, color: '#777', fontSize: 12, marginRight: 19, paddingTop: 1 }}>Move to Favorites</Text>
@@ -80,19 +94,76 @@ const Bag = ({ navigation, route }) =>
                        
 
                         <View style={{alignItems:'flex-end'}}>
-                            <Text>${cardItemList.price}</Text>
+                            <Text>${item.price.toFixed(2)}</Text>
                         </View>
                         
                     </View>
-                    
-                    
-                    
-                </View>
-                <View>
+                </View>)}
+                
 
+
+                <View style={{ backgroundColor: 'rgb(249,247,247)', paddingLeft: 20, paddingRight:20, paddingBottom:20 }}>
+                    <View style={{paddingTop: 25}}>
+                        <Text style={{fontSize: 15, fontFamily: 'Poppins_500Medium'}}>ORDER SUMMARY</Text>
+                    </View>
+                    <View style={{flexDirection:'row', paddingTop:25, flex:1}}>
+                        <Text style={{ color: '#777',}}>Subtotal: </Text>
+                        <View style={{alignItems:'flex-end', flex:1}}>
+                            <Text style={{ color: '#777',}}>${subtotal.toFixed(2)}</Text>
+                        </View>
+                    </View>
+                    <View style={{flexDirection:'row', paddingTop:5}}>
+                        <Text style={{ color: '#777',}}>Estimated Shipping:</Text>
+                        <View style={{alignItems:'flex-end', flex:1}}>
+                            <Text style={{ color: '#777',}}>${estShipping.toFixed(2)}</Text>
+                        </View>
+                    </View>
+                    <View style={{flexDirection:'row', paddingTop:5}}>
+                        <Text style={{fontSize: 15, fontFamily: 'Poppins_500Medium'}}>TOTAL:</Text>
+                        <View style={{alignItems:'flex-end', flex:1}}>
+                            <Text style={{ fontSize: 15, fontFamily: 'Poppins_500Medium' }}>${total.toFixed(2)}</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingTop: 10 }}>
+                    <View style={{paddingRight:8}}>
+                        <Ionicons name="md-shield-checkmark-outline" size={24} color="rgb(96,96,96)" />
+                    </View>
+                    <View style={{paddingTop:5}}>
+                        <Text style={{color:"rgb(96,96,96)"}}>AUTHENCITY GUARANTEED</Text>
+                    </View>
+                    <View style={{alignItems:'flex-end', flex:1, paddingTop:5}}>
+                        <Text style={{color:'rgb(145,14,27)', fontSize: 20}}>+</Text>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingTop: 20 }}>
+                    <View style={{paddingRight:8}}>
+                        <MaterialCommunityIcons name="truck-outline" size={24} color="rgb(96,96,96)" />
+                    </View>
+                    <View style={{paddingTop:5}}>
+                        <Text style={{color:"rgb(96,96,96)"}}>IN STOCK & READY TO SHIP</Text>
+                    </View>
+                    <View style={{alignItems:'flex-end', flex:1, paddingTop:5}}>
+                        <Text style={{color:'rgb(145,14,27)', fontSize: 20}}>+</Text>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingTop: 20 }}>
+                    <View style={{paddingRight:8}}>
+                        <MaterialCommunityIcons name="package-variant" size={25} color="rgb(96,96,96)" />
+                    </View>
+                    <View style={{paddingTop:5}}>
+                        <Text style={{color:"rgb(96,96,96)"}}>RETURNS ACCEPTED</Text>
+                    </View>
+                    <View style={{alignItems:'flex-end', flex:1, paddingTop:5}}>
+                        <Text style={{color:'rgb(145,14,27)', fontSize: 20}}>+</Text>
+                    </View>
                 </View>
                 
             </ScrollView>
+            <View>
+                <Text>CHECKOUT</Text>
+            </View>
+            <SafeAreaView edges={['bottom']} />
         </View>
     );
 }

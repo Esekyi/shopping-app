@@ -45,7 +45,7 @@ const HomePage = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <SafeAreaView style={{backgroundColor: "#fff"}}>
-          <Appheader />
+          <Appheader navigator={navigation.navigate} />
           {/* <View style={{paddingHorizontal: 10, paddingVertical: 10, flexDirection: 'row', justifyContent: "space-between"}}>
             <View style={{...styles.rectangleView, marginRight: 10}}>
               <Text style={{fontSize: 20, textAlign: 'center', justifyContent: 'center'}}>
