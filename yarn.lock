@@ -3474,6 +3474,11 @@ find-up@~5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+flat-icons@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/flat-icons/-/flat-icons-1.0.0.tgz#9034c0b499e0efd907d341db11df806e5d00670f"
+  integrity sha1-kDTAtJng79kH00HbEd+Abl0AZw8=
+
 fontfaceobserver@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/fontfaceobserver/-/fontfaceobserver-2.1.0.tgz"
