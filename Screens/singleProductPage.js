@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     },
     rectLength: {
         height: 45,
-        // width: 80,
+        // width: 45,
         paddingHorizontal: 35,
         borderWidth: 1,
         borderRadius: 5,
