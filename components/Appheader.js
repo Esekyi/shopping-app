@@ -33,8 +33,10 @@ const Appheader = ({ navigator }) =>
                 <AntDesign name="trademark" size={10} color="rgb(235,235,235)" />
                 </View>
                                   
-                    <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity onPress={()=>navigator('LoginPage')}>
                       <AntDesign name="user" size={24} color="white" style={{ marginRight: 10 }} />
+                  </TouchableOpacity>
                       <TouchableOpacity onPress={()=>navigator('Bag')}>
                         <FontAwesome name="shopping-bag" size={24} color="white" />
                       </TouchableOpacity>

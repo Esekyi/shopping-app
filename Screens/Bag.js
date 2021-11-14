@@ -52,7 +52,7 @@ const Bag = ({ navigation }) =>
                     <Text style={{fontSize: 20, fontFamily: 'Poppins_600SemiBold',marginTop: 20, marginBottom: 20}}>Shopping Bag ({bag.length})</Text>
                 </View>
 
-                {bag.map(item=> <View style={{ padding: 20 }}>
+                {bag.map((item, id)=> <View key={id} style={{ padding: 20 }}>
                     <View key={item.id} style={{ flexDirection:'row', flex:1, paddingBottom: 20}}>
                         <Image source={item.image}
                             style={{
@@ -175,7 +175,7 @@ const Bag = ({ navigation }) =>
                     </TouchableOpacity>
 
                     
-                    <TouchableOpacity style={{ backgroundColor: '#000', flex: 1, padding: 10, alignItems: 'center', flexDirection: 'row', marginLeft: 5 }}>
+                    <TouchableOpacity style={{ backgroundColor: '#000', flex: 1, padding: 10, justifyContent: 'center',alignItems:'center', flexDirection: 'row', marginLeft: 5 }}>
                         <View>
                             <Text style={{ color: '#fff', paddingRight: 3, fontSize: 15 }}>Checkout with</Text>
                         </View>
