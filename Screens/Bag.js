@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,Image, TouchableWithoutFeedback } from 'react-native';
 import Appheader from '../components/Appheader';
-import { FontAwesome, Entypo, SimpleLineIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Entypo, SimpleLineIcons, AntDesign, Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import storeItems, { bag } from '../Consts/cardItemList';
 import { useBag } from '../providers/bagProvider';
 
@@ -151,7 +151,7 @@ const Bag = ({ navigation }) =>
                     <View style={{paddingRight:8}}>
                         <MaterialCommunityIcons name="package-variant" size={25} color="rgb(96,96,96)" />
                     </View>
-                    <View style={{paddingTop:5}}>
+                    <View style={{paddingTop:5, paddingBottom:35}}>
                         <Text style={{color:"rgb(96,96,96)"}}>RETURNS ACCEPTED</Text>
                     </View>
                     <View style={{alignItems:'flex-end', flex:1, paddingTop:5}}>
@@ -160,9 +160,33 @@ const Bag = ({ navigation }) =>
                 </View>
                 
             </ScrollView>
-            <View>
-                <Text>CHECKOUT</Text>
+
+            <View style={{paddingTop:15, alignItems:'center', borderTopWidth:1, borderColor:'#eee'}}>
+                <Text style={{color:"rgb(96,96,96)", fontSize:11}}>Estimated Shipping has been included</Text>
             </View>
+            
+            <View style={{ marginHorizontal: 8, alignContent: 'center' }}>
+
+                <View style={{ flexDirection: 'row', marginTop: 15 }}>
+
+                    <TouchableOpacity style={{ backgroundColor: 'rgb(145,14,27)', flex: 1, marginRight: 5, padding: 10, alignItems: 'center' }}>
+                        <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>CHECKOUT</Text>
+                        <Text style={{ color: '#fff', paddingTop:2, fontSize:13, fontWeight:'bold' }}>${total.toFixed(2)}</Text>
+                    </TouchableOpacity>
+
+                    
+                    <TouchableOpacity style={{ backgroundColor: '#000', flex: 1, padding: 10, alignItems: 'center', flexDirection: 'row', marginLeft: 5 }}>
+                        <View>
+                            <Text style={{ color: '#fff', paddingRight: 3, fontSize: 15 }}>Checkout with</Text>
+                        </View>
+                        <View>
+                            <FontAwesome5 name="apple-pay" size={40} color="white"  />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+            
             <SafeAreaView edges={['bottom']} />
         </View>
     );

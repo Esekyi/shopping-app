@@ -213,7 +213,7 @@ const SingleProductPage = ({ navigation, route }) =>
                        
                         
                     </View>
-                    <TouchableOpacity>
+                    <TouchableWithoutFeedback onPress={navigation.goBack}>
                         <View style={{ alignContent: 'center', marginTop: 0}}>
                             <Image
                                 style={{
@@ -224,9 +224,9 @@ const SingleProductPage = ({ navigation, route }) =>
                                 }}
                                 source={require('../assets/card.png')} />
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                     
-                    <Text style={{fontSize: 14,textDecorationLine: 'underline',paddingLeft:10, fontWeight:'bold', paddingTop: 20}}>DESCRIPTION</Text>
+                    <Text style={{fontSize: 15, paddingLeft:10, fontWeight:'bold', paddingTop: 20}}>DETAILS</Text>
                     <Text style={{ padding: 10 }}>
                         {cardItemList.description}
                     </Text>
