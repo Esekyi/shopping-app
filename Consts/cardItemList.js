@@ -32,8 +32,8 @@ const storeItems = [
       productNumber:'DS2891800',
       stock: 10,
       partSize: ['12x4','15x2'],
-      density: ['150','90','300'],
-      stretchedLength: ['14','16','18','20','22'],
+      density: ['150','90'],
+      stretchedLength: ['14','16','20'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
@@ -124,9 +124,9 @@ const storeItems = [
       },
       productNumber:'WV7097537',
       stock: 20,
-      partSize: ['L','XL'],
-      density: ['150','90'],
-      stretchedLength: ['14','18','20'],
+      partSize: ['S','M','XL'],
+      density: ['OS'],
+      stretchedLength: ['OS'],
       description:
         "Lorem Ipsum is simply dummy text \n of the printing and typesetting industry. \n Lorem Ipsum has been the industry's \n standard dummy text ever since the 1500s,\nwhen an unknown printer took a galley of type \n and scrambled it to make a type specimen book.",
     },
