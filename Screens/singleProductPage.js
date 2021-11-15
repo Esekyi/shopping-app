@@ -61,10 +61,10 @@ const SingleProductPage = ({ navigation, route }) =>
     }
     
     return (
-        <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-            <View style={{flexDirection: 'row'}}>
+        <View style={{ flex: 1, backgroundColor: "#fff" }}>
+            <View style={{flexDirection: 'row', backgroundColor:'#ffffff90'}}>
                 <TouchableOpacity onPress={navigation.goBack}>
-                    <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center', marginTop: 50 }}>
+                    <View style={{ padding: 5, flexDirection: 'row', alignItems: 'center', marginTop: 35 }}>
                             <Entypo name="chevron-thin-left" size={25} color="#777" />
                             <Text style={{fontSize: 15}}> Back</Text>
                     </View>
