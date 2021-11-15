@@ -1,70 +1,93 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, SafeAreaView, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Text, SafeAreaView, StyleSheet, TextInput, TouchableWithoutFeedback} from 'react-native';
 import {  Entypo } from '@expo/vector-icons';
+
 
 const Loginpage = ({ navigation }) =>
 {
     return (
         <SafeAreaView style={{flex: 1}}>
             
-            <View style={{ padding: 10, borderBottomWidth: 1, flex: 1, borderBottomColor: '#eee' }}>
+        <View style={{ padding: 10, borderBottomWidth: 1, flex: 1, borderBottomColor: '#eee' }}>
+          <View style={{flexDirection:'row'}}>
                 <TouchableOpacity onPress={navigation.goBack}>
                     <Entypo name="chevron-thin-left" size={27} color="#777" />
                 </TouchableOpacity>
-                <ScrollView>
-                    <View style={SkertStyles.container}>
-                        <Text style={SkertStyles.title}>Welcome</Text>
-                        <Text style={SkertStyles.title}>Back 💋</Text>
-                        <View style={SkertStyles.formContainer}>
-                            <TextInput
-                                placeholder="Enter your email" style={SkertStyles.textInput}></TextInput>
-                            <TextInput secureTextEntry={true}
-                                placeholder="Enter your password" style={SkertStyles.textInput}></TextInput>
-                            <TouchableOpacity onPress={() => navigation.navigate("SignUpPage")}>
-                                <View style={SkertStyles.button}>
-                                    <Text style={SkertStyles.buttonText}>Sign In</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </ScrollView>
+            
+                <View style={{flex:1,justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{fontWeight:'bold', fontSize:19, fontFamily: 'Poppins_400Regular'}}>My Account</Text>
+                </View>
             </View>
+                
+                
+                  <View style={styles.container}>
+                          <View style={{flexDirection:'row', justifyContent:'center'}}>
+                            <Text style={{...styles.title, fontFamily:'Poppins_200ExtraLight',letterSpacing:-1.6 }}>SKERBELS</Text>
+                            <Text style={{...styles.title, fontFamily:'Poppins_900Black',letterSpacing:-1.8 }}>APPAREL</Text>
+                          </View>
+              <View style={styles.formContainer }>
+                <View style={ {...styles.textInputArea, borderWidth:1,borderColor:'#ccc'}}>
+                            <TextInput
+                                placeholder="Email" style={{paddingHorizontal:12, paddingTop:25,paddingBottom:5, borderBottomWidth:0.3, borderBottomColor:'#ccc' }} ></TextInput>
+                            <TextInput secureTextEntry={true}
+                                placeholder="Password" style={{paddingHorizontal:12,paddingBottom:5, paddingTop:25}}></TextInput>
+                  </View>
+              </View>
+                            <TouchableOpacity onPress={() => navigation.navigate("HomePage")}>
+                                <View style={{...styles.button, marginHorizontal:60 }}>
+                                    <Text style={styles.buttonText}>Sign In</Text>
+                                </View>
+            </TouchableOpacity>
+            <View style={{paddingTop:20, alignItems:'center'}}>
+              <Text style={{ fontWeight: 'bold', color: 'gray' }}>Forgot password?</Text>
+              <View style={{paddingTop:25, flexDirection:'row'}}>
+                <Text style={{ fontWeight: 'bold', color: 'gray', fontSize:14 }}>Don't have an account? </Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("SignUpPage")}>
+                  <Text style={{ fontSize:16,textDecorationLine:'underline',textDecorationColor:'#000' }}>Create Account</Text>
+                </TouchableWithoutFeedback>
+                
+              </View>
+              
+            </View>
+            </View>
+            
+        </View>
+        
         </SafeAreaView>
     );
 }
 
-  const SkertStyles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
-    //   display: 'flex',
-        justifyContent: "center",
-        paddingLeft: 50,
-        paddingRight: 50,
-          height: "100%",
-        paddingTop: 50,
-
-      
+    paddingHorizontal:10,
+    height: "100%",
+    paddingTop: 40, 
     },
     title: {
-      fontSize: 50,
-      fontWeight: "900",
+      fontSize: 24,
     },
     formContainer: {
       marginTop: 50
     },
-    textInput: {
-      borderWidth: 1,
-      borderColor: "#ccc",
-      borderRadius: 100,
-      padding: 15,
-      marginBottom: 15
+    textInputArea: {
+      borderRadius: 5,
+      marginBottom: 40,
+    },
+    inputShadow: {
+      shadowColor: 'black',
+      shadowOpacity: 0.70,
+      shadowRadius: 21,
+      shadowOffset: {
+        width: 2, height: 2
+      }
     },
     button: {
       padding: 15,
-      borderRadius: 100,
-      backgroundColor: "blue",
+      marginTop:10,
+      borderRadius: 5,
+      backgroundColor: "black",
       color: "white",
-      display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
     },
     buttonText: {
       textAlign: "center",

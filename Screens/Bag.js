@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity,Image, TouchableWithoutFeedback } from 'react-native';
-import Appheader from '../components/Appheader';
+// import Appheader from '../components/Appheader';
 import { FontAwesome, Entypo, SimpleLineIcons, AntDesign, Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import storeItems, { bag } from '../Consts/cardItemList';
 import { useBag } from '../providers/bagProvider';
