@@ -6,7 +6,7 @@ import {  Entypo } from '@expo/vector-icons';
 const Loginpage = ({ navigation }) =>
 {
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={[styles.container, {flex: 1}]}>
             
         <View style={{ padding: 10, borderBottomWidth: 1, flex: 1, borderBottomColor: '#eee' }}>
           <View style={{flexDirection:'row'}}>
@@ -25,16 +25,22 @@ const Loginpage = ({ navigation }) =>
                             <Text style={{...styles.title, fontFamily:'Poppins_200ExtraLight',letterSpacing:-1.6 }}>SKERBELS</Text>
                             <Text style={{...styles.title, fontFamily:'Poppins_900Black',letterSpacing:-1.8 }}>APPAREL</Text>
                           </View>
-              <View style={styles.formContainer }>
-                <View style={ {...styles.textInputArea, borderWidth:1,borderColor:'#ccc'}}>
-                            <TextInput
-                                placeholder="Email" style={{paddingHorizontal:12, paddingTop:25,paddingBottom:5, borderBottomWidth:0.3, borderBottomColor:'#ccc' }} ></TextInput>
-                            <TextInput secureTextEntry={true}
-                                placeholder="Password" style={{paddingHorizontal:12,paddingBottom:5, paddingTop:25}}></TextInput>
+              <View style={[styles.formContainer]}>
+              <View style={[styles.inputShadow, styles.textInputArea, { backgroundColor: "#fff" }]}>
+                <View style={{paddingHorizontal:12, paddingVertical: 10,}}>
+                    <Text style={{fontWeight: "bold", color: "#777"}}>Email</Text>
+                    <TextInput
+                        placeholder="johndoe@gmail.com" style={{ paddingVertical: 10, borderBottomWidth:0.3, borderBottomColor:'#ccc' }} ></TextInput>
+                </View>
+                <View style={{paddingHorizontal:12, paddingVertical: 10,}}>
+                    <Text style={{fontWeight: "bold", color: "#777"}}>Password</Text>
+                    <TextInput secureTextEntry={true}
+                        placeholder="************" style={{paddingVertical: 10}}></TextInput>
+                </View>
                   </View>
               </View>
                             <TouchableOpacity onPress={() => navigation.navigate("HomePage")}>
-                                <View style={{...styles.button, marginHorizontal:60 }}>
+                                <View style={[styles.button, { marginHorizontal:60 }]}>
                                     <Text style={styles.buttonText}>Sign In</Text>
                                 </View>
             </TouchableOpacity>
@@ -61,20 +67,21 @@ const Loginpage = ({ navigation }) =>
     container: {
     paddingHorizontal:10,
     height: "100%",
-    paddingTop: 40, 
+      paddingTop: 40,
+    backgroundColor: "#fff"
     },
     title: {
       fontSize: 24,
     },
     formContainer: {
-      marginTop: 50
+      marginTop: 50,
+      marginBottom: 40,
     },
     textInputArea: {
       borderRadius: 5,
-      marginBottom: 40,
     },
     inputShadow: {
-      shadowColor: 'black',
+      shadowColor: '#dfdfdf',
       shadowOpacity: 0.70,
       shadowRadius: 21,
       shadowOffset: {

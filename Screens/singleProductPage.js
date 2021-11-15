@@ -1,22 +1,20 @@
 import React,{useEffect,useState} from 'react';
 import {TouchableOpacity, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableWithoutFeedback} from 'react-native';
 import Appheader from '../components/Appheader';
-import { FontAwesome, AntDesign, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, FontAwesome5, Entypo, SimpleLineIcons } from '@expo/vector-icons';
 import { useBag } from '../providers/bagProvider';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const width = (Dimensions.get("screen").width) - 300;
-
-// const partSizes = ["13x4", "15x2", "13x1", "12x2"];
-// const densities = [150, 90, 112, 300];
-// const stretchedLengths = [14, 16, 18, 20, 22, 24];
-
 
 const SingleProductPage = ({ navigation, route }) =>
 {
     const { add: addToBag } = useBag();
     const cardItemList = route.params;
     const [isFavorite, setIsFavorite] = useState(false);
-    const [color, setColor] = useState("imageMain");
+    const [color, setColor] = useState(() =>
+        Object.keys(cardItemList.images).filter(key=> key !== "imageMain")[0]
+    );
 
     // partSize
     const [partSize, setPartSize] = useState(cardItemList.partSize[0]);
@@ -62,13 +60,19 @@ const SingleProductPage = ({ navigation, route }) =>
     
     return (
         <View style={{ flex: 1, backgroundColor: "#fff" }}>
-            <View style={{flexDirection: 'row', backgroundColor:'#ffffff90'}}>
-                <TouchableOpacity onPress={navigation.goBack}>
-                    <View style={{ padding: 5, flexDirection: 'row', alignItems: 'center', marginTop: 35 }}>
-                            <Entypo name="chevron-thin-left" size={25} color="#777" />
-                            <Text style={{fontSize: 15}}> Back</Text>
-                    </View>
-                </TouchableOpacity>
+            <View style={{ backgroundColor: '#ffffff90' }}>
+                <SafeAreaView edges={["top"]} />
+                <View style={{flexDirection: "row", paddingHorizontal: 15, justifyContent: 'space-between'}}>
+                    <TouchableOpacity onPress={navigation.goBack}>
+                        <View style={{ padding: 5, flexDirection: 'row', alignItems: 'center' }}>
+                                <Entypo name="chevron-thin-left" size={25} color="#777" />
+                                <Text style={{fontSize: 15}}> Back</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Bag')} style={{flexDirection:'row'}}>
+                        <SimpleLineIcons name="handbag" size={29} color="#777" />
+                    </TouchableOpacity>
+                </View>
             </View>
             <ScrollView style={{flex: 1}}>
                 {/* <Appheader /> */}
@@ -94,10 +98,12 @@ const SingleProductPage = ({ navigation, route }) =>
                             <Text style={{ marginRight: 10 }}>COLOUR:</Text>
                             {Object.keys(cardItemList.images)
                                 .filter(color => color !== "imageMain")
-                                .map((color, id) => <TouchableWithoutFeedback key={id} onPress={() => setColor(color)
-                            }>
-                                <View style={{ ...styles.imageColor, backgroundColor: color, marginRight:5 }} />
-                            </TouchableWithoutFeedback>)}
+                                .map((col, id) =>
+                                    <TouchableWithoutFeedback key={id} onPress={() => setColor(col)}>
+                                        <View style={{padding: 5, width: 35, height: 35, marginRight: 10, borderRadius: 50, borderWidth: col === color ? 2 : 0}}>
+                                            <View style={{ ...styles.imageColor, backgroundColor: col, marginRight:5 }} />
+                                        </View>
+                                    </TouchableWithoutFeedback>)}
                         </View>
                         <View style={{ flexDirection: 'row', paddingTop: 20 }}>
                             <View style={{flex: 1}}>
@@ -341,9 +347,9 @@ const styles = StyleSheet.create({
         borderColor: '#000',
     },
     imageColor: {
-        height: 24,
-        width: 24,
-        borderRadius: 24/2,
+        height: "100%",
+        width: "100%",
+        borderRadius: 50,
     },
     imageColorOval: {
         height: 30,
