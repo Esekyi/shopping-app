@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { users } from '../Consts/cardItemList';
 import { Ionicons, SimpleLineIcons, Octicons,Entypo, FontAwesome } from '@expo/vector-icons';
@@ -7,13 +7,6 @@ import { useAuth } from '../providers/AuthProvider';
 const Myaccount = ({ navigation }) =>
 {
     const { user, logout } = useAuth();
-
-    useEffect(() => {
-        if (!user)
-        {
-            navigation.navigate("HomePage");
-        }
-    }, [user]);
 
     return (
         <SafeAreaView style={{backgroundColor:'#fff', flex:1}}>
@@ -25,7 +18,7 @@ const Myaccount = ({ navigation }) =>
                 <View style={{justifyContent:'center'}}>
                     <Text style={{fontWeight:'500', fontSize:19, color:'#000'}}>My Account</Text>
                 </View>
-                <TouchableWithoutFeedback onPress={logout}>
+                <TouchableWithoutFeedback onPress={() => { logout(); navigation.navigate("HomePage") }}>
                     <View style={{justifyContent:'center'}}><SimpleLineIcons name="logout" size={24} color="black" /></View>
                 </TouchableWithoutFeedback>
             </View>
