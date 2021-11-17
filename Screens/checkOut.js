@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { users } from '../Consts/cardItemList';
 
@@ -9,16 +9,16 @@ const width = (Dimensions.get("screen").width / 2) - 15
 
 const Checkout = ({navigation}) => {
     return (
-        <SafeAreaView style={{flex:1}}>
-            <View style={{paddingHorizontal:10}}>
-                <View style={{flexDirection:'row', marginBottom:25}}>
+        <SafeAreaView style={{flex:1, backgroundColor:'#fff'}}>
+                <View style={{flexDirection:'row', marginBottom:25, paddingHorizontal:10}}>
                     <TouchableOpacity onPress={navigation.goBack}>
-                        <Entypo name="chevron-thin-left" size={27} color="#777" />
+                        <Entypo name="chevron-thin-left" size={25} color="#777" />
                     </TouchableOpacity >
                     <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
                         <Text style={{fontSize:18, fontWeight:'600'}}>Checkout</Text>
                     </View>
                 </View>
+            <ScrollView style={{paddingHorizontal:10}}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection:'row', marginBottom:15 }}>
                     <Text style={{color:'rgb(123,130,152)', fontWeight:'500'}}>signed in as </Text>
                     <Text style={{fontWeight:'700',letterSpacing:0.5}}>{users[0].email}</Text>
@@ -73,6 +73,20 @@ const Checkout = ({navigation}) => {
                             </View>
                         </View>
                     </View>
+                    <View style={styles.inputShadow,[{marginTop:15, paddingVertical: 20,backgroundColor:'#fff',paddingHorizontal:10 }]}>
+                        <View>
+                            <Text style={{fontSize:18, fontWeight:'bold'}}>Summary</Text>
+                        </View>
+                        <View style={{marginTop:10, flexDirection:'row'}}>
+                            <Text style={{ fontWeight: '600', fontSize: 15 }}>Subtotal</Text>
+                            <Text>$</Text>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={[styles.continuePayShadow,{justifyContent:'center', alignItems:'center', backgroundColor:'#fff', padding:20}]}>
+                <View style={{backgroundColor:'#000', paddingHorizontal:30, paddingVertical: 10, borderRadius: 4}}>
+                    <Text style={{fontSize:20, fontWeight:'700', color:'#fff'}}>Continue to Payment</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -85,6 +99,14 @@ const styles = StyleSheet.create({
         shadowRadius: 21,
         shadowOffset: {
             width: 2, height: 2,
+        }
+    },
+    continuePayShadow: {
+        shadowColor: '#dfdfdf',
+        shadowOpacity: 0.70,
+        shadowRadius: 7,
+        shadowOffset: {
+            width: 0, height: -7,
         }
     },
 })

@@ -27,7 +27,8 @@ const Loginpage = ({ navigation }) => {
           }
           } else
           {
-            setError("User does not exist!")
+            setError("User does not exist!");
+            setTimeout(() => setError(""), 2500);
       }
     });
 
