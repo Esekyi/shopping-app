@@ -33,7 +33,7 @@ const Checkout = ({ navigation }) =>
             <ScrollView style={{paddingHorizontal:10}}>
                 <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection:'row', marginBottom:15 }}>
                     <Text style={{color:'rgb(123,130,152)', fontWeight:'500'}}>signed in as </Text>
-                    <Text style={{fontWeight:'700',letterSpacing:0.5}}>{users[0].email}</Text>
+                    <Text style={{fontWeight:'700',letterSpacing:0.5}}>{users.email}</Text>
                 </View>
                 <View style={[ { }]}>
                         <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign:'center', marginVertical:10 }}>
@@ -46,11 +46,11 @@ const Checkout = ({ navigation }) =>
                                 </View>
                         <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, borderBottomColor: '#ccc', paddingHorizontal:5}}>
                             <View style={{ justifyContent:'flex-start', width,}}>
-                                <TextInput placeholder="First Name" style={{ paddingVertical: 10 }} >{users[0].Fname }</TextInput>
+                                <TextInput placeholder="First Name" style={{ paddingVertical: 10 }} >{users.firstName }</TextInput>
                             </View>
 
                             <View style={{ borderLeftWidth: 0.5, borderLeftColor: '#ccc', justifyContent: 'flex-end' }}>
-                                <TextInput placeholder="Last Name" style={{ paddingVertical: 10, paddingLeft: 10, width }} >{users[0].Lname }</TextInput>
+                                <TextInput placeholder="Last Name" style={{ paddingVertical: 10, paddingLeft: 10, width }} >{users.lastName }</TextInput>
                         </View>
                         </View>
                         <View style={{ marginTop: 10 }}>
@@ -121,9 +121,9 @@ const Checkout = ({ navigation }) =>
                 </View>
             </ScrollView>
             <View style={[styles.continuePayShadow,{justifyContent:'center', alignItems:'center', backgroundColor:'#fff', padding:20}]}>
-                <View style={{backgroundColor:'#000', paddingHorizontal:30, paddingVertical: 10, borderRadius: 4}}>
+                <TouchableOpacity style={{backgroundColor:'#000', paddingHorizontal:30, paddingVertical: 10, borderRadius: 4}}>
                     <Text style={{fontSize:20, fontWeight:'700', color:'#fff'}}>Continue to Payment</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
