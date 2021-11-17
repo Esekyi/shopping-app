@@ -2,8 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { users } from '../Consts/cardItemList';
 import { Ionicons, SimpleLineIcons, Octicons,Entypo, FontAwesome } from '@expo/vector-icons';
+import { useAuth } from '../providers/AuthProvider';
 
-const Myaccount = ({navigation}) => {
+const Myaccount = ({ navigation }) =>
+{
+    const { user } = useAuth();
+
     return (
         <SafeAreaView style={{backgroundColor:'#fff', flex:1}}>
             <View style={{ flexDirection: 'row', justifyContent:'space-between', paddingHorizontal:20}}>
@@ -19,7 +23,7 @@ const Myaccount = ({navigation}) => {
 
             <View style={{paddingHorizontal:10, paddingTop:30}}>
                 <View style={{ marginBottom:10}}>
-                    <Text style={{fontSize:32, fontWeight:'600', color:'rgb(123,130,152)'}}> Hi, {users[0].Fname}.</Text>
+                    <Text style={{fontSize:32, fontWeight:'600', color:'rgb(123,130,152)'}}> Hi, {user.firstName}.</Text>
                 </View>
                 <View style={[styles.inputShadow,styles.AccountList, { backgroundColor:'#fff'}]}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between',   borderBottomWidth: 1, borderBottomColor:"rgb(234,231,233)", paddingHorizontal:15, paddingTop:25, paddingBottom:25 }}>

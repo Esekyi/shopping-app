@@ -1,13 +1,25 @@
-import React from 'react';
-import { View, Text, TextInput, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, TextInput, SafeAreaView, TouchableOpacity, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { users } from '../Consts/cardItemList';
+import { useBag } from '../providers/bagProvider';
 
 
 const width = (Dimensions.get("screen").width / 2) - 15
 
 
-const Checkout = ({navigation}) => {
+const Checkout = ({ navigation }) =>
+{
+    const { bag } = useBag();
+    const shipping = 12;
+    const tax = 3;
+    const subtotal = useMemo(() =>
+    {
+        let output = 0;
+        bag.forEach(item => output += item.price);
+        return output;
+    }, [bag])
+
     return (
         <SafeAreaView style={{flex:1, backgroundColor:'#fff'}}>
                 <View style={{flexDirection:'row', marginBottom:25, paddingHorizontal:10}}>
@@ -79,8 +91,32 @@ const Checkout = ({navigation}) => {
                         </View>
                         <View style={{marginTop:10, flexDirection:'row'}}>
                             <Text style={{ fontWeight: '600', fontSize: 15 }}>Subtotal</Text>
-                            <Text>$</Text>
+                             <View style={{alignItems:'flex-end', flex:1}}>
+                                <Text>${subtotal.toFixed(2)}</Text>
+                            </View>
                         </View>
+                        <View style={{marginTop:5, flexDirection:'row'}}>
+                            <Text style={{ fontWeight: '600', fontSize: 15 }}>Shipping</Text>
+                            <View style={{alignItems:'flex-end', flex:1}}>
+                                <Text>${shipping.toFixed(2)}</Text>
+                            </View>
+                        </View>
+                        <View style={{marginTop:5, flexDirection:'row'}}>
+                            <Text style={{ fontWeight: '600', fontSize: 15 }}>Tax</Text>
+                            <View style={{alignItems:'flex-end', flex:1}}>
+                                <Text>${tax.toFixed(2)}</Text>
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 5, flexDirection: 'row' }}>
+                                <Text style={{ fontWeight: '600', fontSize: 15, flex: 1 }}>{bag.length} item(s)</Text>
+                            <View style={{ alignItems: 'flex-end', flexDirection: "row" }}>
+                                <Text style={{ fontWeight: '600', fontSize: 15, marginRight: 10, color: "#777" }}>Total</Text>
+                                <Text style={{fontSize: 18, fontWeight: "bold"}}>${(subtotal + shipping + tax).toFixed(2)}</Text>
+                            </View>
+                        </View>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{paddingVertical: 20}}>
+                            {bag.map(item => <Image source={item.image} style={{resizeMode: "contain", width: 70, height: 100, marginRight: 20, borderWidth: 1, borderColor: "#ddd", borderRadius: 10}}/>)}
+                        </ScrollView>
                     </View>
                 </View>
             </ScrollView>

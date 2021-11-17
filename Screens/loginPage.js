@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, SafeAreaView, StyleSheet, TextInput, TouchableWithoutFeedback} from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { users } from '../Consts/cardItemList';
+import { useAuth } from '../providers/AuthProvider';
 
 
-const Loginpage = ({ navigation }) => {
+const Loginpage = ({ navigation }) =>
+{
+  const { login } = useAuth();
   const [formValues, setFormValues] = useState({
     email: "",
     password: ""
@@ -12,29 +15,31 @@ const Loginpage = ({ navigation }) => {
 
   const [error, setError] = useState("");
 
+  const emptyFormField = () =>
+    {
+        let output = false;
+        Object.values(formValues).forEach(value =>
+        {
+            if (value.length < 1) output = true;
+        });
+        return output;
+    }
+
   const handleSubmit = () =>
   {
     let exists = false;
 
-    users.forEach(user =>{
-          if (user.email === formValues.email) {
-            if (user.password === formValues.password)
-            {
-              exists = true;
-            } else
-            {
-              setError("Incorrect password!")
-          }
-          } else
-          {
-            setError("User does not exist!");
-            setTimeout(() => setError(""), 2500);
-      }
-    });
-
-    if (exists)
+    if (!emptyFormField())
     {
-      navigation.navigate("MyAccount");
+      const response = login(formValues);
+      if (response)
+      {
+        navigation.navigate("MyAccount");
+      } else
+      {
+        setError("User does not exist");
+        setTimeout(() => setError(""), 2500);
+      }
     }
   }
 
@@ -53,8 +58,6 @@ const Loginpage = ({ navigation }) => {
                   <Text style={{fontWeight:'bold', fontSize:19, fontFamily: 'Poppins_400Regular'}}>My Account</Text>
                 </View>
             </View>
-                
-                
                   <View style={styles.container}>
                           <View style={{flexDirection:'row', justifyContent:'center'}}>
                             <Text style={{...styles.title, fontFamily:'Poppins_200ExtraLight',letterSpacing:-1.6 }}>SKERBELS</Text>

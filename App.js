@@ -59,6 +59,7 @@ import Loginpage from './Screens/loginPage';
 import SignUppage from './Screens/sign_upPage';
 import Myaccount from './Screens/myAccount';
 import Checkout from './Screens/checkOut';
+import { AuthProvider } from './providers/AuthProvider';
 
 const Stack = createNativeStackNavigator();
 
@@ -109,20 +110,22 @@ const App = () => {
     return <View />;
   } else {
     return (
-      <BagProvider>
-        <NavigationContainer>
-          <StatusBar barStyle = 'dark-content'/>
-          <Stack.Navigator >
-            <Stack.Screen name="HomePage" component={HomePage} options={{headerShown: false}} />
-            <Stack.Screen name="SinglePage" component={SingleProductPage} options={{headerShown: false}} />
-            <Stack.Screen name="Bag" component={Bag} options={{headerShown: false}} />
-            <Stack.Screen name="LoginPage" component={Loginpage} options={{headerShown: false}} />
-            <Stack.Screen name="SignUpPage" component={SignUppage} options={{ title: "Create an Account" }} />
-            <Stack.Screen name="MyAccount" component={Myaccount} options={{ headerShown: false }} />
-            <Stack.Screen name="CheckOut" component={Checkout} options={{headerShown: false}}/>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </BagProvider>
+      <AuthProvider>
+        <BagProvider>
+          <NavigationContainer>
+            <StatusBar barStyle = 'dark-content'/>
+            <Stack.Navigator >
+              <Stack.Screen name="HomePage" component={HomePage} options={{headerShown: false}} />
+              <Stack.Screen name="SinglePage" component={SingleProductPage} options={{headerShown: false}} />
+              <Stack.Screen name="Bag" component={Bag} options={{headerShown: false}} />
+              <Stack.Screen name="LoginPage" component={Loginpage} options={{headerShown: false}} />
+              <Stack.Screen name="SignUpPage" component={SignUppage} options={{ title: "Create an Account" }} />
+              <Stack.Screen name="MyAccount" component={Myaccount} options={{ headerShown: false }} />
+              <Stack.Screen name="CheckOut" component={Checkout} options={{headerShown: false}}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+        </BagProvider>
+      </AuthProvider>
   );}
 };
 

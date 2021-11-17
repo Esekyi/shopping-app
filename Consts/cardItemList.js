@@ -188,7 +188,7 @@ const storeItems = [
   
 export const bag = [];
 
-export const users = [{id:"47bds8qan$", Fname:"sskert",Lname:"Emma", email:"me@skerbel.com", password:"me@fudf2023"}];
+export const users = [];
 
   
   export default storeItems;

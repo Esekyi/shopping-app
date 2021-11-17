@@ -1,35 +1,73 @@
 import React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native';
-import {  Entypo, Fontisto } from '@expo/vector-icons';
+import { Entypo, Fontisto } from '@expo/vector-icons';
+import { useState } from 'react';
+import { useAuth } from '../providers/AuthProvider';
 
 
 
 
-const SignUppage = ({navigation}) => {
+const SignUppage = ({ navigation }) =>
+{
+    const { signup } = useAuth();
+    const [formValues, setFormValues] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+    });
+    const [error, setError] = useState("");
+    const emptyFormField = () =>
+    {
+        let output = false;
+        Object.values(formValues).forEach(value =>
+        {
+            if (value.length < 1) output = true;
+        });
+        return output;
+    }
+
+    const handleSubmit = () =>
+    {
+        if (!emptyFormField())
+        {
+            signup(formValues);
+            navigation.navigate("LoginPage")
+        } else
+        {
+            setError("All fields are required!");
+            setTimeout(() => setError(""), 2500);
+        }
+    }
+
+    const handleChange = (name, values) => setFormValues({ ...formValues, [name]: values });
+    
     return (
             <SafeAreaView style={{...styles.container, flex:1}}>
                 <View style={styles.formContainer}>
-
+                <View style={{height: 20, alignItems: "center", justifyContent: "center"}}>
+                    <Text style={{color: "red", textAlign: "center"}}>{error}</Text>
+                    </View>
                     <Text style={{fontWeight:'bold', color:'gray'}}>First Name</Text>
-                    <TextInput 
+                    <TextInput value={formValues.firstName} onChangeText={(values)=>handleChange("firstName",values)} 
                         placeholder="First Name" style={{...
                             styles.textInput, fontSize: 15, fontWeight:'300'
                         }}></TextInput>
                     
                     <Text style={{fontWeight:'bold', color:'gray'}}>Last Name</Text>
-                    <TextInput
+                    <TextInput value={formValues.lastName} onChangeText={(values)=>handleChange("lastName",values)}
                         placeholder="Last Name" style={{...
                             styles.textInput, fontSize: 15,fontWeight:'300'
                         }}></TextInput>
                     
                     <Text style={{fontWeight:'bold', color:'gray'}}>Email</Text>
-                    <TextInput
+                    <TextInput value={formValues.email} onChangeText={(values)=>handleChange("email",values.toLowerCase())}
                         placeholder="johndoe@gmail.com" style={{...
                             styles.textInput, fontSize: 15,fontWeight:'300'
                         }}></TextInput>
                     
                     <Text style={{fontWeight:'bold', color:'gray'}}>Password</Text>
-                    <TextInput style={{...
+                    <TextInput value={formValues.password} onChangeText={(values)=>handleChange("password",values)} style={{...
                             styles.textInput, fontSize: 15,fontWeight:'300'
                     }} placeholder="**************" secureTextEntry={true} />
                     <View style={{flexDirection:'row'}}>
@@ -41,7 +79,7 @@ const SignUppage = ({navigation}) => {
                         <Text style={{textDecorationLine:'underline', paddingTop:2,fontSize:15.5}}>Privacy Policy.</Text>
                     </View>
                 
-                <TouchableOpacity style={{ padding: 14, backgroundColor: 'black', flexDirection: 'row', marginTop:50, borderRadius:6, alignItems:'center', justifyContent:'space-between' }}>
+                <TouchableOpacity onPress={handleSubmit} style={{ padding: 14, backgroundColor: 'black', flexDirection: 'row', marginTop:50, borderRadius:6, alignItems:'center', justifyContent:'space-between' }}>
                         <Fontisto name="locked" size={20} color="transparent" />
                         <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>Register</Text>
                         <Fontisto name="locked" size={20} color="white" />
