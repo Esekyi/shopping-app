@@ -33,7 +33,7 @@ const Loginpage = ({ navigation }) => {
 
     if (exists)
     {
-      navigation.navigate("HomePage");
+      navigation.navigate("MyAccount");
     }
   }
 

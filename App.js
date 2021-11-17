@@ -57,6 +57,7 @@ import Bag from './Screens/Bag';
 import { BagProvider } from './providers/bagProvider';
 import Loginpage from './Screens/loginPage';
 import SignUppage from './Screens/sign_upPage';
+import Myaccount from './Screens/myAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -115,7 +116,8 @@ const App = () => {
             <Stack.Screen name="SinglePage" component={SingleProductPage} options={{headerShown: false}} />
             <Stack.Screen name="Bag" component={Bag} options={{headerShown: false}} />
             <Stack.Screen name="LoginPage" component={Loginpage} options={{headerShown: false}} />
-            <Stack.Screen name="SignUpPage" component={SignUppage} options={{title:"Create an Account"}}/>
+            <Stack.Screen name="SignUpPage" component={SignUppage} options={{ title: "Create an Account" }} />
+            <Stack.Screen name="MyAccount" component={Myaccount} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </BagProvider>
