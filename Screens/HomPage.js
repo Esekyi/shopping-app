@@ -86,8 +86,9 @@ const styles = StyleSheet.create({
   cardDesign: {
     // height: 350,
     backgroundColor: '#fff',
-    borderWidth: 0.2,
-    borderColor: '#A9A9A9',
+    borderRadius:6,
+    borderWidth: 1,
+    borderColor: 'rgb(234,231,233)',
     width,
     marginBottom: 20,
     marginHorizontal: 5,

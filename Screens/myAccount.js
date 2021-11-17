@@ -5,7 +5,7 @@ import { Ionicons, SimpleLineIcons, Octicons,Entypo, FontAwesome } from '@expo/v
 
 const Myaccount = ({navigation}) => {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor:'#fff', flex:1}}>
             <View style={{ flexDirection: 'row', justifyContent:'space-between', paddingHorizontal:20}}>
                 <TouchableOpacity onPress={()=>navigation.navigate('HomePage')}>
                     <Ionicons name="home-outline" size={24} color="black" />
@@ -19,7 +19,7 @@ const Myaccount = ({navigation}) => {
 
             <View style={{paddingHorizontal:10, paddingTop:30}}>
                 <View style={{ marginBottom:10}}>
-                    <Text style={{fontSize:32, fontWeight:'600', color:'rgb(123,130,152)'}}> Hi, {users.Fname}.</Text>
+                    <Text style={{fontSize:32, fontWeight:'600', color:'rgb(123,130,152)'}}> Hi, {users[0].Fname}.</Text>
                 </View>
                 <View style={[styles.inputShadow,styles.AccountList, { backgroundColor:'#fff'}]}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between',   borderBottomWidth: 1, borderBottomColor:"rgb(234,231,233)", paddingHorizontal:15, paddingTop:25, paddingBottom:25 }}>
@@ -50,7 +50,7 @@ const Myaccount = ({navigation}) => {
                         </View>
                     </View>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between',   borderBottomWidth: 1, borderBottomColor:"rgb(234,231,233)", paddingHorizontal:15, paddingTop:25, paddingBottom:25 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal:15, paddingTop:25, paddingBottom:25 }}>
                         <View style={{flexDirection:'row'}}>
                             <View style={{marginRight:10, alignItems:'center'}}>
                                 <FontAwesome name= "heart-o" size={24} color= 'rgb(123,130,152)'  />
@@ -64,7 +64,7 @@ const Myaccount = ({navigation}) => {
                         </View>
                     </View>
                 </View>
-                <View style={{marginTop:30}}>
+                <View style={{marginTop:40}}>
                     <Text style={{ fontSize: 20, fontWeight: '500', color: 'rgb(70,70,70)' }}>Recently Viewed</Text>
                     <View style={{ paddingVertical: 20, alignItems:'center', borderWidth:1, borderColor:'rgb(234,231,231)', marginTop:20}}>
                         <Entypo name="eye-with-line" size={25} color="rgb(123,130,152)" />
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.70,
         shadowRadius: 21,
         shadowOffset: {
-            width: 2, height: 6,
+            width: 2, height: 2,
         }
     },
     AccountList: {

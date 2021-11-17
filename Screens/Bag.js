@@ -169,7 +169,7 @@ const Bag = ({ navigation }) =>
 
                 <View style={{ flexDirection: 'row', marginTop: 15 }}>
 
-                    <TouchableOpacity style={{ backgroundColor: 'rgb(145,14,27)', flex: 1, marginRight: 5, padding: 10, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('CheckOut')} style={{ backgroundColor: 'rgb(145,14,27)', flex: 1, marginRight: 5, padding: 10, alignItems: 'center' }}>
                         <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>CHECKOUT</Text>
                         <Text style={{ color: '#fff', paddingTop:2, fontSize:13, fontWeight:'bold' }}>${total.toFixed(2)}</Text>
                     </TouchableOpacity>
