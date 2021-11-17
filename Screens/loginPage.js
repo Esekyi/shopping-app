@@ -1,10 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, SafeAreaView, StyleSheet, TextInput, TouchableWithoutFeedback} from 'react-native';
-import {  Entypo } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { users } from '../Consts/cardItemList';
 
 
-const Loginpage = ({ navigation }) =>
-{
+const Loginpage = ({ navigation }) => {
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [error, setError] = useState("");
+
+  const handleSubmit = () =>
+  {
+    let exists = false;
+
+    users.forEach(user =>{
+          if (user.email === formValues.email) {
+            if (user.password === formValues.password)
+            {
+              exists = true;
+            } else
+            {
+              setError("Incorrect password!")
+          }
+          } else
+          {
+            setError("User does not exist!")
+      }
+    });
+
+    if (exists)
+    {
+      navigation.navigate("HomePage");
+    }
+  }
+
+  const handleChange = (name, value) => setFormValues({ ...formValues, [name]: value });
+
     return (
         <SafeAreaView style={[styles.container, {flex: 1}]}>
             
@@ -25,21 +59,24 @@ const Loginpage = ({ navigation }) =>
                             <Text style={{...styles.title, fontFamily:'Poppins_200ExtraLight',letterSpacing:-1.6 }}>SKERBELS</Text>
                             <Text style={{...styles.title, fontFamily:'Poppins_900Black',letterSpacing:-1.8 }}>APPAREL</Text>
                           </View>
-              <View style={[styles.formContainer]}>
+            <View style={[styles.formContainer]}>
+              <View style={{paddingBottom:20}}>
+                <Text style={{color:'red', textAlign:'center'}}>{ error }</Text>
+              </View>
               <View style={[styles.inputShadow, styles.textInputArea, { backgroundColor: "#fff" }]}>
                 <View style={{paddingHorizontal:12, paddingVertical: 10,}}>
                     <Text style={{fontWeight: "bold", color: "#777"}}>Email</Text>
-                    <TextInput
+                    <TextInput value={formValues.email} onChangeText={(value)=> handleChange("email", value.toLowerCase())}
                         placeholder="johndoe@gmail.com" style={{ paddingVertical: 10, borderBottomWidth:0.3, borderBottomColor:'#ccc' }} ></TextInput>
                 </View>
                 <View style={{paddingHorizontal:12, paddingVertical: 10,}}>
                     <Text style={{fontWeight: "bold", color: "#777"}}>Password</Text>
-                    <TextInput secureTextEntry={true}
+                    <TextInput secureTextEntry={true} value={formValues.password} onChangeText={(value)=> handleChange("password", value)}
                         placeholder="************" style={{paddingVertical: 10}}></TextInput>
                 </View>
                   </View>
               </View>
-                            <TouchableOpacity onPress={() => navigation.navigate("HomePage")}>
+                            <TouchableOpacity onPress={handleSubmit}>
                                 <View style={[styles.button, { marginHorizontal:60 }]}>
                                     <Text style={styles.buttonText}>Sign In</Text>
                                 </View>
