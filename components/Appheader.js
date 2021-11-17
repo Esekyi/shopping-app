@@ -2,10 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import cardItemList  from '../Consts/cardItemList';
+import { useAuth } from '../providers/AuthProvider';
 
 
 const Appheader = ({ navigator }) =>
 {
+  const { user } = useAuth();
 
     return (
         <View style={{backgroundColor: '#fff'}}>
@@ -34,7 +36,7 @@ const Appheader = ({ navigator }) =>
                 </View>
                                   
               <View style={{ flexDirection: 'row' }}>
-                  <TouchableOpacity onPress={()=>navigator('LoginPage')}>
+                  <TouchableOpacity onPress={()=> user ? navigator("MyAccount") : navigator('LoginPage')}>
                       <AntDesign name="user" size={24} color="white" style={{ marginRight: 10 }} />
                   </TouchableOpacity>
                       <TouchableOpacity onPress={()=>navigator('Bag')}>
